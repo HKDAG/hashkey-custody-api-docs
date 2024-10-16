@@ -25,7 +25,6 @@ Hashkey Prime provides a simple and robust RESTful API and client SDK to integra
 The management API enables the following:
 
 - Creation of Wallets
-- Manage the assets or positions in exchange accounts
 
 The wallet API enables the following:
 
@@ -40,14 +39,8 @@ HashKey Prime has two separate environments available for development and produc
 ## Production Environment
 The production endpoint is live and used by partners.
 
-- Production Site: https://prime.hashkey.com/
-- Production API endpoint: https://prime.hashkey.com/saas-api
-
 ## Test Environment
-The test environment is entirely separate from the production environment and there is no overlap in either data or accounts. You will need to create accounts at https://saas.jadepool.io/.
-
-- Test Site: https://saas.jadepool.io/
-- Test API endpoint: https://openapi.jadepool.io
+The test environment is entirely separate from the production environment and there is no overlap in either data or accounts.
 
 This environment is connected to the TestNet networks of various digital currencies we support. Tokens on these networks can be obtained from faucets and do not represent real money.
 
@@ -59,12 +52,10 @@ For test Environment, please refer the list:
 
 | Coin | Blockchain | Description |
 | ---- | ---------- | ----------- |
-| ETH | Ethereum | Koven testnet |
-| NASH | Ethereum | Koven testnet, ERC20 |
-| BTC | Bitcoin | public testnet |
-| EOS | Eosio | Jungle testnet |
-| ATOM | Cosmos | Private testnet |
-| IRIS | Irisnet | Private testnet |
+| ETH | Ethereum | Sepolia Testnet |
+| USDT | Ethereum | Sepolia Testnet, ERC20 |
+| TRX | Tron | Tron Testnet |
+| BTC | Bitcoin | public Testnet |
 
 # API Authentication
 
@@ -1308,145 +1299,6 @@ data:
 
 Value | Type | Description
 --------- | ------- | ---------
-
-### get wallet attributes by id
-
-```shell
-$ go run cmd/ctl/main.go "teamkey" "teamsecret" "GetWalletInfo" "appID"
-code: 0
-message: success
-data:
-{
-  "bizType": "NORMAL",
-  "description": "string",
-  "id": "L6RayqPn4jXExW0",
-  "name": "test",
-  "status": "NORMAL"
-}
-```
-
-```go
-	result, _ = company.GetWalletInfo("appID")
-```
-
-**Summary:** get wallet attributes by id
-
-#### HTTP Request 
-`GET /api/v1/app/{appID}/info` 
-
-**Parameters**
-
-| Name | Located in | Description | Required | Type |
-| ---- | ---------- | ----------- | -------- | ---- |
-| X-Company-Key | header | team api key | Yes | string |
-| appID | path | wallet id | Yes | string |
-
-**Response Result**
-
-Value | Type | Description
---------- | ------- | ---------
-id | string | the wallet id
-name | string | the wallet name
-description | string | the wallet description
-status | string | the wallet status, NORMAL/ABNORMAL
-bizType | string | the wallet type, NORMAL
-
-### trade
-
-```shell
-$ go run cmd/ctl/main.go "teamkey" "teamsecret" "Trade" "walletzr1o0kjwq3j84pxw" "ETH/USDT" "market" "buy" "0.01" "ETH"
-code: 0
-message: success
-data:
-{
-  "id": "3477737825",
-  "symbol": "ETH/USDT",
-  "type": "market",
-  "side": "buy",
-  "amount": 0.01,
-  "filled": 0.01,
-  "status": "closed",
-  "price": 1831.65
-}
-```
-
-**Summary:** create a new trade order in the API wallet
-
-#### HTTP Request 
-`POST /api/v1/app/{appID}/trade` 
-
-**Parameters**
-
-| Name | Located in | Description | Required | Type |
-| ---- | ---------- | ----------- | -------- | ---- |
-| X-Company-Key | header | team api key | Yes | string |
-| appID | path | api wallet id | Yes | string |
-| symbol | body | trade symbol, base/quote | Yes | string |
-| type | body | trade type, only support MARKET currently | Yes | string |
-| side | body | trade side, BUY/SELL | Yes | string |
-| amount | body | amount of the user wants to buy or sell | Yes | string |
-| amountCoin | body | amount coin | Yes | string |
-
-**Response Result**
-
-Value | Type | Description
---------- | ------- | ---------
-id | string | trade order id
-symbol | string | trade symbol
-type | string | trade type
-side | string | trade side
-amount | number | total amount
-filled | number | filled amount
-status | string | open/closed/canceled/rejected/expired
-price | number | average price
-
-
-### get trade order
-
-```shell
-$ go run cmd/ctl/main.go "teamkey" "teamsecret" "GetTradeOrder" "walletzr1o0kjwq3j84pxw" "ETH/USDT" "3477737825"
-code: 0
-message: success
-data:
-{
-  "id": "3477737825",
-  "symbol": "ETH/USDT",
-  "type": "market",
-  "side": "buy",
-  "amount": 0.01,
-  "filled": 0.01,
-  "status": "closed",
-  "price": 1831.65
-}
-```
-
-**Summary:** get trade order
-
-#### HTTP Request 
-`GET /api/v1/app/{appID}/trade/{tradeID}` 
-
-**Parameters**
-
-| Name | Located in | Description | Required | Type |
-| ---- | ---------- | ----------- | -------- | ---- |
-| X-App-Key | header | app key | Yes | string |
-| appID | path | wallet id | Yes | string |
-| tradeID | path | trade order id | Yes | string |
-| symbol | query | trade symbol | Yes | string |
-
-**Response Result**
-
-Value | Type | Description
---------- | ------- | ---------
-id | string | order id
-symbol | string | trade symbol
-type | string | trade type
-side | string | trade side
-amount | number | total amount
-filled | number | filled amount
-status | string | open/closed/canceled/rejected/expired
-price | number | average price
-
 
 # Callback
 
