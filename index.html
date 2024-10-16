@@ -338,15 +338,6 @@
                           <li>
                             <a href="#update-appkey" class="toc-h3 toc-link" data-title="update appkey">update appkey</a>
                           </li>
-                          <li>
-                            <a href="#get-wallet-attributes-by-id" class="toc-h3 toc-link" data-title="get wallet attributes by id">get wallet attributes by id</a>
-                          </li>
-                          <li>
-                            <a href="#trade" class="toc-h3 toc-link" data-title="trade">trade</a>
-                          </li>
-                          <li>
-                            <a href="#get-trade-order" class="toc-h3 toc-link" data-title="get trade order">get trade order</a>
-                          </li>
                       </ul>
                   </li>
               </ul>
@@ -391,7 +382,6 @@
 
 <ul>
 <li>Creation of Wallets</li>
-<li>Manage the assets or positions in exchange accounts</li>
 </ul>
 
 <p>The wallet API enables the following:</p>
@@ -405,18 +395,8 @@
 <p>HashKey Prime has two separate environments available for development and production. For security reasons, all API requests are made using TLS over HTTPS.</p>
 <h2 id='production-environment'>Production Environment</h2>
 <p>The production endpoint is live and used by partners.</p>
-
-<ul>
-<li>Production Site: https://prime.hashkey.com/</li>
-<li>Production API endpoint: https://prime.hashkey.com/saas-api</li>
-</ul>
 <h2 id='test-environment'>Test Environment</h2>
-<p>The test environment is entirely separate from the production environment and there is no overlap in either data or accounts. You will need to create accounts at https://saas.jadepool.io/.</p>
-
-<ul>
-<li>Test Site: https://saas.jadepool.io/</li>
-<li>Test API endpoint: https://openapi.jadepool.io</li>
-</ul>
+<p>The test environment is entirely separate from the production environment and there is no overlap in either data or accounts.</p>
 
 <p>This environment is connected to the TestNet networks of various digital currencies we support. Tokens on these networks can be obtained from faucets and do not represent real money.</p>
 <h1 id='coin-digital-currency-support'>Coin / Digital Currency Support</h1>
@@ -438,32 +418,22 @@
 <tr>
 <td>ETH</td>
 <td>Ethereum</td>
-<td>Koven testnet</td>
+<td>Sepolia Testnet</td>
 </tr>
 <tr>
-<td>NASH</td>
+<td>USDT</td>
 <td>Ethereum</td>
-<td>Koven testnet, ERC20</td>
+<td>Sepolia Testnet, ERC20</td>
+</tr>
+<tr>
+<td>TRX</td>
+<td>Tron</td>
+<td>Tron Testnet</td>
 </tr>
 <tr>
 <td>BTC</td>
 <td>Bitcoin</td>
-<td>public testnet</td>
-</tr>
-<tr>
-<td>EOS</td>
-<td>Eosio</td>
-<td>Jungle testnet</td>
-</tr>
-<tr>
-<td>ATOM</td>
-<td>Cosmos</td>
-<td>Private testnet</td>
-</tr>
-<tr>
-<td>IRIS</td>
-<td>Irisnet</td>
-<td>Private testnet</td>
+<td>public Testnet</td>
 </tr>
 </tbody></table>
 <h1 id='api-authentication'>API Authentication</h1><h1 id='general-structure'>General Structure</h1>
@@ -2544,326 +2514,6 @@ data:
 <th>Description</th>
 </tr>
 </thead><tbody>
-</tbody></table>
-<h3 id='get-wallet-attributes-by-id'>get wallet attributes by id</h3><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>go run cmd/ctl/main.go <span class="s2">"teamkey"</span> <span class="s2">"teamsecret"</span> <span class="s2">"GetWalletInfo"</span> <span class="s2">"appID"</span>
-code: 0
-message: success
-data:
-<span class="o">{</span>
-  <span class="s2">"bizType"</span>: <span class="s2">"NORMAL"</span>,
-  <span class="s2">"description"</span>: <span class="s2">"string"</span>,
-  <span class="s2">"id"</span>: <span class="s2">"L6RayqPn4jXExW0"</span>,
-  <span class="s2">"name"</span>: <span class="s2">"test"</span>,
-  <span class="s2">"status"</span>: <span class="s2">"NORMAL"</span>
-<span class="o">}</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="x">    </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">company</span><span class="o">.</span><span class="n">GetWalletInfo</span><span class="p">(</span><span class="s">"appID"</span><span class="p">)</span><span class="x">
-</span></code></pre>
-<p><strong>Summary:</strong> get wallet attributes by id</p>
-<h4 id='http-request-22'>HTTP Request</h4>
-<p><code>GET /api/v1/app/{appID}/info</code> </p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>X-Company-Key</td>
-<td>header</td>
-<td>team api key</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>appID</td>
-<td>path</td>
-<td>wallet id</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response Result</strong></p>
-
-<table><thead>
-<tr>
-<th>Value</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>the wallet id</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>the wallet name</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
-<td>the wallet description</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>the wallet status, NORMAL/ABNORMAL</td>
-</tr>
-<tr>
-<td>bizType</td>
-<td>string</td>
-<td>the wallet type, NORMAL</td>
-</tr>
-</tbody></table>
-<h3 id='trade'>trade</h3><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>go run cmd/ctl/main.go <span class="s2">"teamkey"</span> <span class="s2">"teamsecret"</span> <span class="s2">"Trade"</span> <span class="s2">"walletzr1o0kjwq3j84pxw"</span> <span class="s2">"ETH/USDT"</span> <span class="s2">"market"</span> <span class="s2">"buy"</span> <span class="s2">"0.01"</span> <span class="s2">"ETH"</span>
-code: 0
-message: success
-data:
-<span class="o">{</span>
-  <span class="s2">"id"</span>: <span class="s2">"3477737825"</span>,
-  <span class="s2">"symbol"</span>: <span class="s2">"ETH/USDT"</span>,
-  <span class="s2">"type"</span>: <span class="s2">"market"</span>,
-  <span class="s2">"side"</span>: <span class="s2">"buy"</span>,
-  <span class="s2">"amount"</span>: 0.01,
-  <span class="s2">"filled"</span>: 0.01,
-  <span class="s2">"status"</span>: <span class="s2">"closed"</span>,
-  <span class="s2">"price"</span>: 1831.65
-<span class="o">}</span>
-</code></pre>
-<p><strong>Summary:</strong> create a new trade order in the API wallet</p>
-<h4 id='http-request-23'>HTTP Request</h4>
-<p><code>POST /api/v1/app/{appID}/trade</code> </p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>X-Company-Key</td>
-<td>header</td>
-<td>team api key</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>appID</td>
-<td>path</td>
-<td>api wallet id</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>body</td>
-<td>trade symbol, base/quote</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>type</td>
-<td>body</td>
-<td>trade type, only support MARKET currently</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>side</td>
-<td>body</td>
-<td>trade side, BUY/SELL</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>amount</td>
-<td>body</td>
-<td>amount of the user wants to buy or sell</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>amountCoin</td>
-<td>body</td>
-<td>amount coin</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response Result</strong></p>
-
-<table><thead>
-<tr>
-<th>Value</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>trade order id</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>trade symbol</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>trade type</td>
-</tr>
-<tr>
-<td>side</td>
-<td>string</td>
-<td>trade side</td>
-</tr>
-<tr>
-<td>amount</td>
-<td>number</td>
-<td>total amount</td>
-</tr>
-<tr>
-<td>filled</td>
-<td>number</td>
-<td>filled amount</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>open/closed/canceled/rejected/expired</td>
-</tr>
-<tr>
-<td>price</td>
-<td>number</td>
-<td>average price</td>
-</tr>
-</tbody></table>
-<h3 id='get-trade-order'>get trade order</h3><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>go run cmd/ctl/main.go <span class="s2">"teamkey"</span> <span class="s2">"teamsecret"</span> <span class="s2">"GetTradeOrder"</span> <span class="s2">"walletzr1o0kjwq3j84pxw"</span> <span class="s2">"ETH/USDT"</span> <span class="s2">"3477737825"</span>
-code: 0
-message: success
-data:
-<span class="o">{</span>
-  <span class="s2">"id"</span>: <span class="s2">"3477737825"</span>,
-  <span class="s2">"symbol"</span>: <span class="s2">"ETH/USDT"</span>,
-  <span class="s2">"type"</span>: <span class="s2">"market"</span>,
-  <span class="s2">"side"</span>: <span class="s2">"buy"</span>,
-  <span class="s2">"amount"</span>: 0.01,
-  <span class="s2">"filled"</span>: 0.01,
-  <span class="s2">"status"</span>: <span class="s2">"closed"</span>,
-  <span class="s2">"price"</span>: 1831.65
-<span class="o">}</span>
-</code></pre>
-<p><strong>Summary:</strong> get trade order</p>
-<h4 id='http-request-24'>HTTP Request</h4>
-<p><code>GET /api/v1/app/{appID}/trade/{tradeID}</code> </p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>X-App-Key</td>
-<td>header</td>
-<td>app key</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>appID</td>
-<td>path</td>
-<td>wallet id</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>tradeID</td>
-<td>path</td>
-<td>trade order id</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>query</td>
-<td>trade symbol</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response Result</strong></p>
-
-<table><thead>
-<tr>
-<th>Value</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>order id</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>trade symbol</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>trade type</td>
-</tr>
-<tr>
-<td>side</td>
-<td>string</td>
-<td>trade side</td>
-</tr>
-<tr>
-<td>amount</td>
-<td>number</td>
-<td>total amount</td>
-</tr>
-<tr>
-<td>filled</td>
-<td>number</td>
-<td>filled amount</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>open/closed/canceled/rejected/expired</td>
-</tr>
-<tr>
-<td>price</td>
-<td>number</td>
-<td>average price</td>
-</tr>
 </tbody></table>
 <h1 id='callback'>Callback</h1><h2 id='order'>Order</h2>
 <blockquote>
