@@ -1286,6 +1286,34 @@ data:
 coinName | string | the coin name
 value | string | the interest value
 
+## 白名单
+
+### 添加白名单
+
+```go
+	result, _ = app.AddWhiteAddress("ETH", "address")
+```
+
+**添加充提白名单**
+
+#### HTTP Request 
+`POST /api/v1/address/whitelist/add` 
+
+**参数**
+
+| 名称 | 位置 | 描述| 是否必需| 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | body | coin type | Yes | string |
+| address | body | receive wallet address | Yes | string |
+
+**响应结果**
+
+Value | Type | Description
+--------- | ------- | ---------
+code | int | 状态 <br /> 0: 成功 <br />10006：内部服务错误<br /> 10005: 参数异常 <br />20003: 重复请求
+message | string | 成功或异常情况描述信息
+
 ## 市场
 
 ### 当前价格

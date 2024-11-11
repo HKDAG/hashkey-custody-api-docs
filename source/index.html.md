@@ -1063,6 +1063,34 @@ value | string | transaction value
 note | string | transfer note
 message | string | transfer message
 
+## White list
+
+### add white address
+
+```go
+	result, _ = app.AddWhiteAddress("ETH", "address")
+```
+
+**add withdraw/deposite white address**
+
+#### HTTP Request 
+`POST /api/v1/address/whitelist/add` 
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | body | coin type | Yes | string |
+| address | body | receive wallet address | Yes | string |
+
+**Response Result**
+
+Value | Type | Description
+--------- | ------- | ---------
+code | int | the result status <br /> 0: success <br />10006：internal error<br /> 10005: bad params <br />20003: duplicate request
+message | string | transfer message
+
 ## Market
 
 ### current price
