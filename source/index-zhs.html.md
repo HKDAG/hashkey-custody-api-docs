@@ -447,7 +447,7 @@ data:
 值 | 类型 | 描述
 --------- | ------- | ---------
 
-### 获取钱包余额
+### 获取钱包单个币种余额
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetBalance" "ETH"
@@ -570,7 +570,7 @@ data:
 --------- | ------- | ---------
 assets | array | the wallet coin list
 
-### 通过id获取钱包资产
+### 获取钱包资产详情
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetAssets"
@@ -613,7 +613,7 @@ data:
 }
 ```
 
-**总结:** 通过id获取钱包资产
+**总结:** 获取钱包资产详情
 
 #### HTTP请求 
 `GET /api/v1/app/assetsWithID`
@@ -724,7 +724,7 @@ data:
 orders | array | order list
 totalAmount | number | the total count of orders
 
-### 获取钱包订单
+### 获取钱包单笔订单
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetOrder" "rNXBQGJlw09apVyg4nDo"
@@ -769,7 +769,7 @@ data:
   APIResult result = appTest.getOrder("rNXBQGJlw09apVyg4nDo");
 ```
 
-**总结:** 获取钱包订单
+**总结:** 获取钱包单笔订单
 
 #### HTTP请求 
 `GET /api/v1/app/order/{id}` 
@@ -1285,6 +1285,34 @@ data:
 --------- | ------- | ---------
 coinName | string | the coin name
 value | string | the interest value
+
+## 白名单
+
+### 添加白名单
+
+```go
+	result, _ = app.AddWhiteAddress("ETH", "address")
+```
+
+**添加充提白名单**
+
+#### HTTP Request 
+`POST /api/v1/address/whitelist/add` 
+
+**参数**
+
+| 名称 | 位置 | 描述| 是否必需| 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | body | coin type | Yes | string |
+| address | body | receive wallet address | Yes | string |
+
+**响应结果**
+
+Value | Type | Description
+--------- | ------- | ---------
+code | int | 状态 <br /> 0: 成功 <br />10006：内部服务错误<br /> 10005: 参数异常 <br />20003: 重复请求
+message | string | 成功或异常情况描述信息
 
 ## 市场
 

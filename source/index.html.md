@@ -482,7 +482,7 @@ data:
 Value | Type | Description
 --------- | ------- | ---------
 
-### get wallet balance 
+### get wallet signle asset balance 
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetBalance" "ETH"
@@ -522,7 +522,7 @@ data:
   APIResult result = appTest.getBalance("ETH");
 ```
 
-**Summary:** get wallet balance
+**Summary:** get wallet signle asset balance
 
 #### HTTP Request 
 `GET /api/v1/app/balance/{coinName}` 
@@ -599,7 +599,7 @@ Value | Type | Description
 --------- | ------- | ---------
 assets | array | the wallet coin list
 
-### get wallet assets with id
+### get wallet assets detail
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetAssets"
@@ -643,7 +643,7 @@ data:
 }
 ```
 
-**Summary:** get wallet assets with id
+**Summary:** get wallet assets detail
 
 #### HTTP Request 
 `GET /api/v1/app/assetsWithID`
@@ -796,7 +796,7 @@ Value | Type | Description
 orders | array | order list
 totalAmount | number | the total count of orders
 
-### get wallet order
+### get wallet signle order
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetOrder" "rNXBQGJlw09apVyg4nDo"
@@ -843,7 +843,7 @@ data:
   APIResult result = appTest.getOrder("rNXBQGJlw09apVyg4nDo");
 ```
 
-**Summary:** get wallet order
+**Summary:** get wallet signle order
 
 #### HTTP Request 
 `GET /api/v1/app/order/{id}` 
@@ -1061,6 +1061,34 @@ txid | string | transaction hash
 type | string | token type
 value | string | transaction value
 note | string | transfer note
+message | string | transfer message
+
+## White list
+
+### add white address
+
+```go
+	result, _ = app.AddWhiteAddress("ETH", "address")
+```
+
+**add withdraw/deposite white address**
+
+#### HTTP Request 
+`POST /api/v1/address/whitelist/add` 
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | body | coin type | Yes | string |
+| address | body | receive wallet address | Yes | string |
+
+**Response Result**
+
+Value | Type | Description
+--------- | ------- | ---------
+code | int | the result status <br /> 0: success <br />10006：internal error<br /> 10005: bad params <br />20003: duplicate request
 message | string | transfer message
 
 ## Market

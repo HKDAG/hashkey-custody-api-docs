@@ -1,31 +1,22 @@
 # Errors
 
-The Hashkey Prime API uses the following error codes:
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+The Kittn API uses the following error codes:
 
 
 Error Code | Meaning
 ---------- | -------
-10001 | Bad Key -- Your API key is wrong.
-10002 | Bad Sign -- Your API signature is wrong.
-10003 | Bad Timestamp -- Your API timestamp is wrong.
-10004 | Repeated Nonce -- Your API nonce was given before.
-10005 | Bad Params -- Your request parameters is invalid.
-10006 | Internal Server Error -- We had a problem with our server. Try again later.
-10007 | API Closed -- We don't provide the API anymore.
-10008 | API Suspended -- The function has been suspended currently.
-10009 | Request Timeout -- Request the 3rd platform timeout.
-20001 | Not Found -- The specified resource could not be found.
-20002 | Not Enough -- The wallet balance isn't enough.
-20003 | Repeated Request -- The specified resource has existed.
-20005 | Too Small -- The amount is too small.
-20007 | Forbidden -- The API is hidden for the user.
-20008 | In Blacklist -- The request address in the blacklist.
-20009 | Not In Whitelist -- The request address not in the whitelist.
-20010 | Not In Package -- The package don't support this feature. Please upgrade the package.
-20011 | Hour Limit -- The request hit the hour limit of order.
-20012 | Day Limit -- The request hit the day limit of order.
-20013 | Transaction Limit -- The request hit the transaction limit of order.
-20014 | AML Closed -- The AML service had been closed.
-20015 | Not In AML Asset List -- The asset isn't supported by AML service.
-20016 | Not Authorization -- The user not authorization.
-20017 | Token expired -- The user token expired. Please refresh.
+400 | Bad Request -- Your request is invalid.
+401 | Unauthorized -- Your API key is wrong.
+403 | Forbidden -- The kitten requested is hidden for administrators only.
+404 | Not Found -- The specified kitten could not be found.
+405 | Method Not Allowed -- You tried to access a kitten with an invalid method.
+406 | Not Acceptable -- You requested a format that isn't json.
+410 | Gone -- The kitten requested has been removed from our servers.
+418 | I'm a teapot.
+429 | Too Many Requests -- You're requesting too many kittens! Slow down!
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
