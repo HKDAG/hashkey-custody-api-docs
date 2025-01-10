@@ -1,6 +1,6 @@
 --- 
 
-title: HashKey Prime API Documentation
+title: HashKey Custody API Documentation
 
 language_tabs: 
    - shell
@@ -20,7 +20,7 @@ search: true
 
 # Introduction 
 
-Hashkey Prime provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java).We have 2 level API, management API and wallet API.
+Hashkey Custody provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java).We have 2 level API, management API and wallet API.
 
 The management API enables the following:
 
@@ -34,7 +34,7 @@ The wallet API enables the following:
 
 # Environments
 
-HashKey Prime has two separate environments available for development and production. For security reasons, all API requests are made using TLS over HTTPS.
+HashKey Custody has two separate environments available for development and production. For security reasons, all API requests are made using TLS over HTTPS.
 
 ## Production Environment
 The production endpoint is live and used by partners.
