@@ -1,6 +1,6 @@
 --- 
 
-title: HashKey Prime API Documentation
+title: HashKey Custody API Documentation
 
 language_tabs: 
    - shell
@@ -20,7 +20,7 @@ search: true
 
 # 介绍
 
-Hashkey Prime 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java)接口。我们提供 2 个级别的 API, 管理API 和 钱包API。
+Hashkey Custody 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java)接口。我们提供 2 个级别的 API, 管理API 和 钱包API。
 
 管理 API 可以实现以下功能:
 
@@ -34,7 +34,7 @@ Hashkey Prime 提供了一个简单而强大的 RESTful API 和客户端 SDK ，
 
 # 环境
 
-HashKey Prime 有两个用于开发和生产的独立环境。 出于安全考虑, 所有API请求均使用TLS加密的HTTPS协议发出。
+HashKey Custody 有两个用于开发和生产的独立环境。 出于安全考虑, 所有API请求均使用TLS加密的HTTPS协议发出。
 
 ## 生产环境
 生产端点是线上环境，提供给合作伙伴使用。
