@@ -9,7 +9,7 @@ language_tabs:
    - java
 
 toc_footers: 
-   - <a href='https://github.com/nbltrust/hashkey-custody-api-docs'>Documentation</a>
+   - <a href='https://github.com/HKDAG/hashkey-custody-api-docs'>Documentation</a>
 
 includes:
   - errors
@@ -20,7 +20,7 @@ search: true
 
 # Introduction 
 
-Hashkey Custody provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java).We have 2 level API, management API and wallet API.
+Hashkey Custody provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our [NodeJs SDK](https://github.com/HKDAG/hashkey-custody-sdk-nodejs.git), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/HKDAG/jadepool-saas-sdk-java.git).We have 2 level API, management API and wallet API.
 
 The management API enables the following:
 
@@ -97,7 +97,7 @@ if GET request, the url looks like this:
 # Wallet API
 
 ```shell
-$ git clone https://github.com/nbltrust/hashkey-custody-sdk-golang.git && cd hashkey-custody-sdk-golang
+$ git clone https://github.com/HKDAG/hashkey-custody-sdk-go && cd hashkey-custody-sdk-golang
 ```
 
 ```javascript
@@ -379,13 +379,17 @@ data:
       "balance": "10001.225",
       "money": "98175466.911631525",
       "name": "BTC",
-      "price": "9816.344189"
+      "price": "9816.344189",
+      "outLocked": "11.2",
+      "inLocked": "11.2"
     },
     {
       "balance": "1.0",
       "money": "246.565827",
       "name": "ETH",
-      "price": "246.565827"
+      "price": "246.565827",
+      "outLocked": "11.2",
+      "inLocked": "11.2"
     }
   ],
   "total": "98175713.477458525"
@@ -436,6 +440,8 @@ balance | string | the coin balance
 money | string | the amount(USD) equal to the balance
 name | string | the coin name
 price | string | the coin price(USD)
+outLocked | string | the coin transfer out amount under locked
+inLocked | string | the coin transfer in amount under locked
 
 ### add wallet asset
 
@@ -796,6 +802,31 @@ Value | Type | Description
 orders | array | order list
 totalAmount | number | the total count of orders
 
+order:
+
+Value | Type | Description
+--------- | ------- | ---------
+bizType | string | order type
+block | number | the block transaction mined in
+coinName | string | unique token name
+confirmations | number | number of transaction confirmations
+fee | string | fee burnt for the transaction
+from | string | transaction input
+id | string | order id
+memo | string | order memo
+n | number | order index
+state | string | order state
+to | string | transaction output
+txid | string | transaction hash
+type | string | token type
+value | string | transaction value
+note | string | order note
+message | string | message to recipient of transfer
+createdAt | number |  unix timestamp, seconds
+finalizedAt | number |  unix timestamp, seconds
+relatedOrderId | string | related order id
+
+
 ### get wallet signle order
 
 ```shell
@@ -821,7 +852,8 @@ data:
   "note": "note",
   "message": "",
   "createdAt": 1569306519,
-  "finalizedAt": 1569306519
+  "finalizedAt": 1569306519,
+  "relatedOrderId": "orderrNXBQGJlw09apVyg4nDo"
 }
 ```
 
@@ -877,7 +909,7 @@ note | string | order note
 message | string | message to recipient of transfer
 createdAt | number |  unix timestamp, seconds
 finalizedAt | number |  unix timestamp, seconds
-
+relatedOrderId | string | related order id
 ### update wallet order
 
 ```shell
@@ -1161,7 +1193,7 @@ timestamp | number | current timestamp
 # Management API
 
 ```shell
-$ git clone https://github.com/nbltrust/hashkey-custody-sdk-golang.git && cd hashkey-custody-sdk-golang
+$ git clone https://github.com/HKDAG/hashkey-custody-sdk-go && cd hashkey-custody-sdk-golang
 ```
 
 ```javascript
@@ -1328,6 +1360,283 @@ data:
 Value | Type | Description
 --------- | ------- | ---------
 
+## Finance
+### Income and Expenditure
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFinanceOrders" "1" "10" "https://stg-xpert.hashkeydev.com/saas-api"
+code: 0
+message: success
+data:
+{
+  "orders": [
+    {
+      "amount": "0.100000000000000000",
+      "fee": "0.000000000000000000",
+      "balance": "2.000000000000000000",
+      "bizOrderID": "ordersxv3z41mwyglorr0gnl2keop5",
+      "bizType": "DEPOSIT",
+      "coinName": "USDT",
+      "createdAt": 1737014596,
+      "exchangeID": "",
+      "exchangeName": "",
+      "from": "0x53f1F06D87683c7443B316DFD994ff1562313888",
+      "fromType": "ADDRESS",
+      "id": "finorderkewm30o8568p8l9j79qp12zn",
+      "note": "",
+      "operator": "",
+      "opsType": "ADMIN",
+      "subType": "DEPOSIT",
+      "to": "0xf128c288b92009CED44D654cDfc111Dc5248cBEE",
+      "toType": "ADDRESS",
+      "txid": "0x3610d05727fa0ff997653e54c69df8c3065b15dd9744130b9887151d58f29507",
+      "updatedAt": 1737014709,
+      "walletID": "walletylr07eg5r4j2mkpw",
+      "walletName": "wallet2"
+    }
+  ],
+  "total": 1
+}
+```
+
+```go
+	result, _ = company.GetFinanceOrders(map[string]interface{}{
+		"page":1,
+    "pageSize":10
+	})
+```
+
+#### HTTP Request 
+`GET /api/v1/finance/orders` 
+
+> Download Excel file: `GET /api/v1/finance/orders/download`
+
+**Params**
+
+| Name | Located in | Description| Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+|wallets|query|wallet id list, multiple values separated by commas|No|string|
+|bizTypes|query|Type:<br>DEPOSIT<br>WITHDRAW<br>BATCH_WITHDRAW<br>BATCH_TRANSFER<br>WALLET_TRANSFER|No|string|
+|subType|query|Subtype:<br>IN<br>OUT|No|string|
+|coins|query|token list (multiple values separated by commas)|No|string|
+|start|query|Start timestamp (seconds)|Yes|number|
+|end|query|End timestamp (seconds)|Yes|number|
+|page|query|Page (starting value is 1)|No|number|
+|pageSize|query|Page size|No|number|
+
+**Response Result**
+
+```json
+{
+  "code": 0,
+  "data": {
+    "orders": [
+      {
+        "amount": "0.106000000000000000",
+        "fee": "0.000000000000000000",
+        "balance": "10.430999300000000000",
+        "bizOrderID": "ordersmq41ndkz1232323232r",
+        "bizType": "WITHDRAW",
+        "coinName": "BTC",
+        "createdAt": 1733971691,
+        "exchangeID": "",
+        "exchangeName": "",
+        "from": "0x510F4a8CC103E0F17915A7630F1524Bb9AF01aB6",
+        "fromType": "ADDRESS",
+        "id": "finorder40ymrp87zgywpw4jlqd95e2w",
+        "note": "34343",
+        "operator": "0x4511@gmail.com",
+        "opsType": "ADMIN",
+        "subType": "WITHDRAW",
+        "to": "0x035221cF1bDcCd8100531B6B6132323232323",
+        "toType": "ADDRESS",
+        "fee": "0.000000000000000000",
+        "txid": "0x01921175f4986bf3bafd2a16a61b886cf12323232323232323",
+        "updatedAt": 1733971965,
+        "walletID": "walletw5l729323232323",
+        "walletName": "BTC_WALLET"
+      }
+    ],
+    "total": 1
+  },
+  "message": "success"
+}
+```
+
+Status Code **200**
+
+|Name|Type|Required|Constraints|Description|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» orders|[object]|true|none|Order list|
+|»»» amount|string|true|none|Amount|
+|»»» fee|string|true|none|Fee|
+|»»» balance|string|true|none|Balance|
+|»»» bizOrderID|string|true|none|Business order id|
+|»»» bizType|string|true|none|Type:<br>DEPOSIT-Deposit<br>WITHDRAW-Withdraw<br>BATCH_WITHDRAW-Batch withdraw<br>BATCH_TRANSFER-Batch transfer<br>WALLET_TRANSFER-Wallet transfer|
+|»»» coinName|string|true|none|Coin name|
+|»»» createdAt|integer|true|none|Created at|
+|»»» exchangeID|string|true|none|Exchange id|
+|»»» exchangeName|string|true|none|Exchange name|
+|»»» from|string|true|none|From|
+|»»» fromType|string|true|none|From type|
+|»»» id|string|true|none|Order id|
+|»»» note|string|true|none|Note|
+|»»» operator|string|true|none|Operator|
+|»»» opsType|string|true|none|Ops type: ADMIN-Admin operation, API-System operation|
+|»»» subType|string|true|none|Subtype:<br>WITHDRAW-Withdraw<br>DEPOSIT-Deposit<br>TRANSFER_OUT-Transfer out<br>TRANSFER_IN-Transfer in|
+|»»» to|string|true|none|Target address or wallet name|
+|»»» toType|string|true|none|Target type: ADDRESS-Address, WALLET-Wallet|
+|»»» txid|string|true|none|Transaction hash|
+|»»» updatedAt|integer|true|none|Updated at|
+|»»» walletID|string|true|none|Wallet id|
+|»»» walletName|string|true|none|Wallet name|
+|»» total|integer|true|none|Total|
+
+
+### Financial Statement
+
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFinanceReport" "1" "10" "https://stg-xpert.hashkeydev.com/saas-api"
+code: 0
+message: success
+data:
+{
+  "reports": [
+      {
+          "coin": "USDT-ERC20",
+          "deposit": "0.000000000000000000",
+          "depositCount": 0,
+          "endingBalance": "0.000000000000000000",
+          "loanPurchase": "0.000000000000000000",
+          "loanPurchaseCount": 0,
+          "loanSettle": "0.000000000000000000",
+          "loanSettleCount": 0,
+          "openingBalance": "0.000000000000000000",
+          "price": 1.0002579083,
+          "priceDeposit": 0,
+          "priceEndingBalance": 0,
+          "priceLoanPurchase": 0,
+          "priceLoanSettle": 0,
+          "priceOpeningBalance": 0,
+          "priceTransferIn": 0,
+          "priceWithdraw": 0,
+          "time": "2024/10/18",
+          "transferIn": "0.000000000000000000",
+          "wallet": {
+              "id": "walletw5l729jn4mgy0843",
+              "name": "HBLHSK"
+          },
+          "withdraw": "0.000000000000000000",
+          "withdrawCount": 0
+      }
+  ],
+  "total": 1
+}
+```
+
+```go
+	result, _ = company.GetFinanceReport(map[string]interface{}{
+		"page":1,
+    "pageSize":10
+	})
+```
+
+#### HTTP请求 
+`GET /api/v1/finance/reports` 
+
+> Download Excel file: `GET /api/v1/finance/reports/download`
+
+**Params**
+
+| Name | Located in | Description| Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+|wallets|query|wallet id list, multiple values separated by commas|No|string|
+|type|query|DAILY-Daily<br>MONTHLY-Monthly<br>ANNUAL-Annual| 否 |string|
+|coins|query|token list (multiple values separated by commas)| 否 |string|
+|startDate|query|Start date (yyyy-MM-dd)|Yes|string|
+|endDate|query|End date (yyyy-MM-dd)| Yes |string|
+|page|query|Page (starting value is 1)|No|number|
+|pageSize|query|Page size|No|number|
+
+**Response Result**
+
+```json
+{
+    "code": 0,
+    "data": {
+        "reports": [
+            {
+                "coin": "ETH",
+                "deposit": "167.000000000000000000",
+                "depositCount": 5,
+                "endingBalance": "10.430999300000000000",
+                "loanPurchase": "0.000000000000000000",
+                "loanPurchaseCount": 0,
+                "loanSettle": "0.000000000000000000",
+                "loanSettleCount": 0,
+                "openingBalance": "0.000000000000000000",
+                "priceDeposit": 297166.4704650682,
+                "priceEndingBalance": 18561.336798829732,
+                "priceLoanPurchase": 0,
+                "priceLoanSettle": 0,
+                "priceOpeningBalance": 0,
+                "priceTransferIn": 0,
+                "priceWithdraw": 278605.1336662383,
+                "time": "2024",
+                "transferIn": "0.000000000000000000",
+                "wallet": {
+                    "id": "walletw5l729jn4mgy0843",
+                    "name": "HBLHSK"
+                },
+                "withdraw": "156.569000700000000000",
+                "withdrawCount": 37
+            }
+        ],
+        "total": 20
+    },
+    "message": "success"
+}
+```
+
+Status Code **200**
+
+|Name|Type|Required|Constraints|Description|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» reports|[object]|true|none|Report list|
+|»»» coin|string|true|none|Coin|
+|»»» deposit|string|true|none|Deposit amount|
+|»»» depositCount|integer|true|none|Deposit count|
+|»»» endingBalance|string|true|none|Ending balance|
+|»»» loanPurchase|string|true|none|Loan purchase amount|
+|»»» loanPurchaseCount|integer|true|none|Loan purchase count|
+|»»» loanSettle|string|true|none|Loan settle amount|
+|»»» loanSettleCount|integer|true|none|Loan settle count|
+|»»» openingBalance|string|true|none|Opening balance|
+|»»» priceDeposit|number|true|none|Deposit price|
+|»»» priceEndingBalance|number|true|none|Ending balance price|
+|»»» priceLoanPurchase|number|true|none|Loan purchase price|
+|»»» priceLoanSettle|number|true|none|Loan settle price|
+|»»» priceOpeningBalance|number|true|none|Opening balance price|
+|»»» priceTransferIn|number|true|none|Transfer in price|
+|»»» priceWithdraw|number|true|none|Withdraw price|
+|»»» time|string|true|none|Time|
+|»»» transferIn|string|true|none|Transfer in amount|
+|»»» wallet|object|true|none|Wallet|
+|»»»» id|string|true|none|Wallet id|
+|»»»» name|string|true|none|Wallet name|
+|»»» withdraw|string|true|none|Withdraw amount|
+|»»» withdrawCount|integer|true|none|Withdraw count|
+|»» total|integer|true|none|Total|
+
 # Callback
 
 ## Order
@@ -1351,7 +1660,8 @@ Value | Type | Description
   "block": 13721091,
   "affirmativeConfirmation": 20,
   "confirmations": 27,
-  "sign": "fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3"
+  "sign": "fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3",
+  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo"
 }
 ```
 
@@ -1376,6 +1686,7 @@ block | number | the block transaction mined in
 memo | string | order note, editable on admin
 n | number | the order index
 sign | string | hex string, sign parameters with HMACSHA256
+relatedOrderId | string | related order id
 
 ### Signature
 In order to prove the message sender's identity, it should be verified by the following steps:
