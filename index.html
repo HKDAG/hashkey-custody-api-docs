@@ -435,6 +435,17 @@
                           </li>
                       </ul>
                   </li>
+                  <li>
+                    <a href="#finance" class="toc-h2 toc-link" data-title="Finance">Finance</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#income-and-expenditure" class="toc-h3 toc-link" data-title="Income and Expenditure">Income and Expenditure</a>
+                          </li>
+                          <li>
+                            <a href="#financial-statement" class="toc-h3 toc-link" data-title="Financial Statement">Financial Statement</a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </li>
           <li>
@@ -464,14 +475,14 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://github.com/nbltrust/hashkey-custody-api-docs'>Documentation</a></li>
+            <li><a href='https://github.com/HKDAG/hashkey-custody-api-docs'>Documentation</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Hashkey Custody provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our <a href="https://github.com/nbltrust/hashkey-custody-sdk-nodejs">NodeJs SDK</a>, <a href="https://github.com/nbltrust/hashkey-custody-sdk-go">Go SDK</a>, <a href="https://github.com/nbltrust/jadepool-saas-sdk-java">Java SDK</a>.We have 2 level API, management API and wallet API.</p>
+<p>Hashkey Custody provides a simple and robust RESTful API and client SDK to integrate digital currency wallets with your application. Feel free to check out our <a href="https://github.com/HKDAG/hashkey-custody-sdk-nodejs.git">NodeJs SDK</a>, <a href="https://github.com/nbltrust/hashkey-custody-sdk-go">Go SDK</a>, <a href="https://github.com/HKDAG/jadepool-saas-sdk-java.git">Java SDK</a>.We have 2 level API, management API and wallet API.</p>
 
 <p>The management API enables the following:</p>
 
@@ -588,7 +599,7 @@
 </code></p>
 
 <p><font size=4>The <a href="#signature">signature method</a> is similar to OAuth.</font></p>
-<h1 id='wallet-api'>Wallet API</h1><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>git clone https://github.com/nbltrust/hashkey-custody-sdk-golang.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>hashkey-custody-sdk-golang
+<h1 id='wallet-api'>Wallet API</h1><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>git clone https://github.com/HKDAG/hashkey-custody-sdk-go <span class="o">&amp;&amp;</span> <span class="nb">cd </span>hashkey-custody-sdk-golang
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">TyTLvCnHINbWZQag88hhmMz1</span><span class="dl">'</span>
 <span class="kd">const</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">uf0rPlTluGnIllGqx0X1os4hQ6rOdXDxStiN4qGd79lS6yeHZaOK4ldvRv1TBqr6</span><span class="dl">'</span>
 <span class="kd">const</span> <span class="nx">apiAddr</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://127.0.0.1:8092</span><span class="dl">'</span>
@@ -958,13 +969,17 @@ data:
       <span class="s2">"balance"</span>: <span class="s2">"10001.225"</span>,
       <span class="s2">"money"</span>: <span class="s2">"98175466.911631525"</span>,
       <span class="s2">"name"</span>: <span class="s2">"BTC"</span>,
-      <span class="s2">"price"</span>: <span class="s2">"9816.344189"</span>
+      <span class="s2">"price"</span>: <span class="s2">"9816.344189"</span>,
+      <span class="s2">"outLocked"</span>: <span class="s2">"11.2"</span>,
+      <span class="s2">"inLocked"</span>: <span class="s2">"11.2"</span>
     <span class="o">}</span>,
     <span class="o">{</span>
       <span class="s2">"balance"</span>: <span class="s2">"1.0"</span>,
       <span class="s2">"money"</span>: <span class="s2">"246.565827"</span>,
       <span class="s2">"name"</span>: <span class="s2">"ETH"</span>,
-      <span class="s2">"price"</span>: <span class="s2">"246.565827"</span>
+      <span class="s2">"price"</span>: <span class="s2">"246.565827"</span>,
+      <span class="s2">"outLocked"</span>: <span class="s2">"11.2"</span>,
+      <span class="s2">"inLocked"</span>: <span class="s2">"11.2"</span>
     <span class="o">}</span>
   <span class="o">]</span>,
   <span class="s2">"total"</span>: <span class="s2">"98175713.477458525"</span>
@@ -1052,6 +1067,16 @@ data:
 <td>price</td>
 <td>string</td>
 <td>the coin price(USD)</td>
+</tr>
+<tr>
+<td>outLocked</td>
+<td>string</td>
+<td>the coin transfer out amount under locked</td>
+</tr>
+<tr>
+<td>inLocked</td>
+<td>string</td>
+<td>the coin transfer in amount under locked</td>
 </tr>
 </tbody></table>
 <h3 id='add-wallet-asset'>add wallet asset</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"AddAsset"</span> <span class="s2">"BTC"</span>
@@ -1656,6 +1681,112 @@ data:
 <td>the total count of orders</td>
 </tr>
 </tbody></table>
+
+<p>order:</p>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bizType</td>
+<td>string</td>
+<td>order type</td>
+</tr>
+<tr>
+<td>block</td>
+<td>number</td>
+<td>the block transaction mined in</td>
+</tr>
+<tr>
+<td>coinName</td>
+<td>string</td>
+<td>unique token name</td>
+</tr>
+<tr>
+<td>confirmations</td>
+<td>number</td>
+<td>number of transaction confirmations</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>fee burnt for the transaction</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>transaction input</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>string</td>
+<td>order memo</td>
+</tr>
+<tr>
+<td>n</td>
+<td>number</td>
+<td>order index</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>order state</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>transaction output</td>
+</tr>
+<tr>
+<td>txid</td>
+<td>string</td>
+<td>transaction hash</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>token type</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>transaction value</td>
+</tr>
+<tr>
+<td>note</td>
+<td>string</td>
+<td>order note</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>message to recipient of transfer</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>number</td>
+<td>unix timestamp, seconds</td>
+</tr>
+<tr>
+<td>finalizedAt</td>
+<td>number</td>
+<td>unix timestamp, seconds</td>
+</tr>
+<tr>
+<td>relatedOrderId</td>
+<td>string</td>
+<td>related order id</td>
+</tr>
+</tbody></table>
 <h3 id='get-wallet-signle-order'>get wallet signle order</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span>
 code: 0
 message: success
@@ -1678,7 +1809,8 @@ data:
   <span class="s2">"note"</span>: <span class="s2">"note"</span>,
   <span class="s2">"message"</span>: <span class="s2">""</span>,
   <span class="s2">"createdAt"</span>: 1569306519,
-  <span class="s2">"finalizedAt"</span>: 1569306519
+  <span class="s2">"finalizedAt"</span>: 1569306519,
+  <span class="s2">"relatedOrderId"</span>: <span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span>
 <span class="o">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>    <span class="k">try</span> <span class="p">{</span>
         <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getOrder</span><span class="p">(</span><span class="dl">"</span><span class="s2">rNXBQGJlw09apVyg4nDo</span><span class="dl">"</span><span class="p">)</span>
@@ -1819,6 +1951,11 @@ data:
 <td>finalizedAt</td>
 <td>number</td>
 <td>unix timestamp, seconds</td>
+</tr>
+<tr>
+<td>relatedOrderId</td>
+<td>string</td>
+<td>related order id</td>
 </tr>
 </tbody></table>
 <h3 id='update-wallet-order'>update wallet order</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"UpdateOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span> <span class="s2">"123"</span>
@@ -2403,7 +2540,7 @@ data:
 <td>current timestamp</td>
 </tr>
 </tbody></table>
-<h1 id='management-api'>Management API</h1><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>git clone https://github.com/nbltrust/hashkey-custody-sdk-golang.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>hashkey-custody-sdk-golang
+<h1 id='management-api'>Management API</h1><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>git clone https://github.com/HKDAG/hashkey-custody-sdk-go <span class="o">&amp;&amp;</span> <span class="nb">cd </span>hashkey-custody-sdk-golang
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">teamKey</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">TyTLvCnHINbWZQag88hhmMz1</span><span class="dl">'</span>
 <span class="kd">const</span> <span class="nx">teamSecret</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">uf0rPlTluGnIllGqx0X1os4hQ6rOdXDxStiN4qGd79lS6yeHZaOK4ldvRv1TBqr6</span><span class="dl">'</span>
 <span class="kd">const</span> <span class="nx">apiAddr</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://127.0.0.1:8092</span><span class="dl">'</span>
@@ -2670,6 +2807,716 @@ data:
 </tr>
 </thead><tbody>
 </tbody></table>
+<h2 id='finance'>Finance</h2><h3 id='income-and-expenditure'>Income and Expenditure</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFinanceOrders"</span> <span class="s2">"1"</span> <span class="s2">"10"</span> <span class="s2">"https://stg-xpert.hashkeydev.com/saas-api"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"orders"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"amount"</span>: <span class="s2">"0.100000000000000000"</span>,
+      <span class="s2">"fee"</span>: <span class="s2">"0.000000000000000000"</span>,
+      <span class="s2">"balance"</span>: <span class="s2">"2.000000000000000000"</span>,
+      <span class="s2">"bizOrderID"</span>: <span class="s2">"ordersxv3z41mwyglorr0gnl2keop5"</span>,
+      <span class="s2">"bizType"</span>: <span class="s2">"DEPOSIT"</span>,
+      <span class="s2">"coinName"</span>: <span class="s2">"USDT"</span>,
+      <span class="s2">"createdAt"</span>: 1737014596,
+      <span class="s2">"exchangeID"</span>: <span class="s2">""</span>,
+      <span class="s2">"exchangeName"</span>: <span class="s2">""</span>,
+      <span class="s2">"from"</span>: <span class="s2">"0x53f1F06D87683c7443B316DFD994ff1562313888"</span>,
+      <span class="s2">"fromType"</span>: <span class="s2">"ADDRESS"</span>,
+      <span class="s2">"id"</span>: <span class="s2">"finorderkewm30o8568p8l9j79qp12zn"</span>,
+      <span class="s2">"note"</span>: <span class="s2">""</span>,
+      <span class="s2">"operator"</span>: <span class="s2">""</span>,
+      <span class="s2">"opsType"</span>: <span class="s2">"ADMIN"</span>,
+      <span class="s2">"subType"</span>: <span class="s2">"DEPOSIT"</span>,
+      <span class="s2">"to"</span>: <span class="s2">"0xf128c288b92009CED44D654cDfc111Dc5248cBEE"</span>,
+      <span class="s2">"toType"</span>: <span class="s2">"ADDRESS"</span>,
+      <span class="s2">"txid"</span>: <span class="s2">"0x3610d05727fa0ff997653e54c69df8c3065b15dd9744130b9887151d58f29507"</span>,
+      <span class="s2">"updatedAt"</span>: 1737014709,
+      <span class="s2">"walletID"</span>: <span class="s2">"walletylr07eg5r4j2mkpw"</span>,
+      <span class="s2">"walletName"</span>: <span class="s2">"wallet2"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"total"</span>: 1
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">company</span><span class="o">.</span><span class="n">GetFinanceOrders</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{}{</span>
+        <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
+    <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
+    <span class="p">})</span>
+</code></pre></div><h4 id='http-request-23'>HTTP Request</h4>
+<p><code>GET /api/v1/finance/orders</code> </p>
+
+<p><strong>Params</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>wallets</td>
+<td>query</td>
+<td>wallet id list, multiple values separated by commas</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>bizTypes</td>
+<td>query</td>
+<td>Type:<br>DEPOSIT<br>WITHDRAW<br>BATCH_WITHDRAW<br>BATCH_TRANSFER<br>WALLET_TRANSFER</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>subType</td>
+<td>query</td>
+<td>Subtype:<br>IN<br>OUT</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>coins</td>
+<td>query</td>
+<td>token list (multiple values separated by commas)</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>start</td>
+<td>query</td>
+<td>Start timestamp (seconds)</td>
+<td>Yes</td>
+<td>number</td>
+</tr>
+<tr>
+<td>end</td>
+<td>query</td>
+<td>End timestamp (seconds)</td>
+<td>Yes</td>
+<td>number</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>Page (starting value is 1)</td>
+<td>No</td>
+<td>number</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>Page size</td>
+<td>No</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Result</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.106000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.430999300000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bizOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ordersmq41ndkz1232323232r"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bizType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WITHDRAW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coinName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733971691</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchangeID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchangeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x510F4a8CC103E0F17915A7630F1524Bb9AF01aB6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDRESS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"finorder40ymrp87zgywpw4jlqd95e2w"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34343"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x4511@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"opsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADMIN"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WITHDRAW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x035221cF1bDcCd8100531B6B6132323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDRESS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x01921175f4986bf3bafd2a16a61b886cf12323232323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733971965</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"walletID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletw5l729323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"walletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_WALLET"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» orders</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>Order list</td>
+</tr>
+<tr>
+<td>»»» amount</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Amount</td>
+</tr>
+<tr>
+<td>»»» fee</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Fee</td>
+</tr>
+<tr>
+<td>»»» balance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Balance</td>
+</tr>
+<tr>
+<td>»»» bizOrderID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Business order id</td>
+</tr>
+<tr>
+<td>»»» bizType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Type:<br>DEPOSIT-Deposit<br>WITHDRAW-Withdraw<br>BATCH_WITHDRAW-Batch withdraw<br>BATCH_TRANSFER-Batch transfer<br>WALLET_TRANSFER-Wallet transfer</td>
+</tr>
+<tr>
+<td>»»» coinName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Coin name</td>
+</tr>
+<tr>
+<td>»»» createdAt</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Created at</td>
+</tr>
+<tr>
+<td>»»» exchangeID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Exchange id</td>
+</tr>
+<tr>
+<td>»»» exchangeName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Exchange name</td>
+</tr>
+<tr>
+<td>»»» from</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>From</td>
+</tr>
+<tr>
+<td>»»» fromType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>From type</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Order id</td>
+</tr>
+<tr>
+<td>»»» note</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Note</td>
+</tr>
+<tr>
+<td>»»» operator</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Operator</td>
+</tr>
+<tr>
+<td>»»» opsType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Ops type: ADMIN-Admin operation, API-System operation</td>
+</tr>
+<tr>
+<td>»»» subType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Subtype:<br>WITHDRAW-Withdraw<br>DEPOSIT-Deposit<br>TRANSFER_OUT-Transfer out<br>TRANSFER_IN-Transfer in</td>
+</tr>
+<tr>
+<td>»»» to</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Target address or wallet name</td>
+</tr>
+<tr>
+<td>»»» toType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Target type: ADDRESS-Address, WALLET-Wallet</td>
+</tr>
+<tr>
+<td>»»» txid</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Transaction hash</td>
+</tr>
+<tr>
+<td>»»» updatedAt</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Updated at</td>
+</tr>
+<tr>
+<td>»»» walletID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet id</td>
+</tr>
+<tr>
+<td>»»» walletName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet name</td>
+</tr>
+<tr>
+<td>»» total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Total</td>
+</tr>
+</tbody></table>
+<h3 id='financial-statement'>Financial Statement</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFinanceReport"</span> <span class="s2">"1"</span> <span class="s2">"10"</span> <span class="s2">"https://stg-xpert.hashkeydev.com/saas-api"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"reports"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+          <span class="s2">"coin"</span>: <span class="s2">"USDT-ERC20"</span>,
+          <span class="s2">"deposit"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"depositCount"</span>: 0,
+          <span class="s2">"endingBalance"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanPurchase"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanPurchaseCount"</span>: 0,
+          <span class="s2">"loanSettle"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanSettleCount"</span>: 0,
+          <span class="s2">"openingBalance"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"price"</span>: 1.0002579083,
+          <span class="s2">"priceDeposit"</span>: 0,
+          <span class="s2">"priceEndingBalance"</span>: 0,
+          <span class="s2">"priceLoanPurchase"</span>: 0,
+          <span class="s2">"priceLoanSettle"</span>: 0,
+          <span class="s2">"priceOpeningBalance"</span>: 0,
+          <span class="s2">"priceTransferIn"</span>: 0,
+          <span class="s2">"priceWithdraw"</span>: 0,
+          <span class="s2">"time"</span>: <span class="s2">"2024/10/18"</span>,
+          <span class="s2">"transferIn"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"wallet"</span>: <span class="o">{</span>
+              <span class="s2">"id"</span>: <span class="s2">"walletw5l729jn4mgy0843"</span>,
+              <span class="s2">"name"</span>: <span class="s2">"HBLHSK"</span>
+          <span class="o">}</span>,
+          <span class="s2">"withdraw"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"withdrawCount"</span>: 0
+      <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"total"</span>: 1
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">company</span><span class="o">.</span><span class="n">GetFinanceReport</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{}{</span>
+        <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
+    <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
+    <span class="p">})</span>
+</code></pre></div><h4 id='http'>HTTP请求</h4>
+<p><code>GET /api/v1/finance/reports</code> </p>
+
+<p><strong>Params</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>wallets</td>
+<td>query</td>
+<td>wallet id list, multiple values separated by commas</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>query</td>
+<td>DAILY-Daily<br>MONTHLY-Monthly<br>ANNUAL-Annual</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>coins</td>
+<td>query</td>
+<td>token list (multiple values separated by commas)</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>query</td>
+<td>Start date (yyyy-MM-dd)</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>query</td>
+<td>End date (yyyy-MM-dd)</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>Page (starting value is 1)</td>
+<td>No</td>
+<td>number</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>Page size</td>
+<td>No</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Result</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"167.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"endingBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.430999300000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanPurchase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanPurchaseCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanSettle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanSettleCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openingBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceDeposit"</span><span class="p">:</span><span class="w"> </span><span class="mf">297166.4704650682</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceEndingBalance"</span><span class="p">:</span><span class="w"> </span><span class="mf">18561.336798829732</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLoanPurchase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLoanSettle"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceOpeningBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceTransferIn"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceWithdraw"</span><span class="p">:</span><span class="w"> </span><span class="mf">278605.1336662383</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transferIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletw5l729jn4mgy0843"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HBLHSK"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"withdraw"</span><span class="p">:</span><span class="w"> </span><span class="s2">"156.569000700000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"withdrawCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» reports</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>Report list</td>
+</tr>
+<tr>
+<td>»»» coin</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Coin</td>
+</tr>
+<tr>
+<td>»»» deposit</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Deposit amount</td>
+</tr>
+<tr>
+<td>»»» depositCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Deposit count</td>
+</tr>
+<tr>
+<td>»»» endingBalance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Ending balance</td>
+</tr>
+<tr>
+<td>»»» loanPurchase</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Loan purchase amount</td>
+</tr>
+<tr>
+<td>»»» loanPurchaseCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Loan purchase count</td>
+</tr>
+<tr>
+<td>»»» loanSettle</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Loan settle amount</td>
+</tr>
+<tr>
+<td>»»» loanSettleCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Loan settle count</td>
+</tr>
+<tr>
+<td>»»» openingBalance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Opening balance</td>
+</tr>
+<tr>
+<td>»»» priceDeposit</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Deposit price</td>
+</tr>
+<tr>
+<td>»»» priceEndingBalance</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Ending balance price</td>
+</tr>
+<tr>
+<td>»»» priceLoanPurchase</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Loan purchase price</td>
+</tr>
+<tr>
+<td>»»» priceLoanSettle</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Loan settle price</td>
+</tr>
+<tr>
+<td>»»» priceOpeningBalance</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Opening balance price</td>
+</tr>
+<tr>
+<td>»»» priceTransferIn</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Transfer in price</td>
+</tr>
+<tr>
+<td>»»» priceWithdraw</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>Withdraw price</td>
+</tr>
+<tr>
+<td>»»» time</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Time</td>
+</tr>
+<tr>
+<td>»»» transferIn</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Transfer in amount</td>
+</tr>
+<tr>
+<td>»»» wallet</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet</td>
+</tr>
+<tr>
+<td>»»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet id</td>
+</tr>
+<tr>
+<td>»»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet name</td>
+</tr>
+<tr>
+<td>»»» withdraw</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Withdraw amount</td>
+</tr>
+<tr>
+<td>»»» withdrawCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Withdraw count</td>
+</tr>
+<tr>
+<td>»» total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>Total</td>
+</tr>
+</tbody></table>
 <h1 id='callback'>Callback</h1><h2 id='order'>Order</h2>
 <blockquote>
 <p>Order notification sends JSON structured like this:</p>
@@ -2691,7 +3538,8 @@ data:
   </span><span class="nl">"block"</span><span class="p">:</span><span class="w"> </span><span class="mi">13721091</span><span class="p">,</span><span class="w">
   </span><span class="nl">"affirmativeConfirmation"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="nl">"confirmations"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3"</span><span class="w">
+  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>Callbck Result</strong></p>
@@ -2787,6 +3635,11 @@ data:
 <td>sign</td>
 <td>string</td>
 <td>hex string, sign parameters with HMACSHA256</td>
+</tr>
+<tr>
+<td>relatedOrderId</td>
+<td>string</td>
+<td>related order id</td>
 </tr>
 </tbody></table>
 <h3 id='signature'>Signature</h3>

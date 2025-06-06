@@ -449,6 +449,17 @@
                           </li>
                       </ul>
                   </li>
+                  <li>
+                    <a href="#4613903460" class="toc-h2 toc-link" data-title="财务">财务</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#36e0803c31" class="toc-h3 toc-link" data-title="收入与支出">收入与支出</a>
+                          </li>
+                          <li>
+                            <a href="#986aedb65a" class="toc-h3 toc-link" data-title="财务报表">财务报表</a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </li>
           <li>
@@ -478,14 +489,14 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://github.com/nbltrust/hashkey-custody-api-docs'>Documentation</a></li>
+            <li><a href='https://github.com/HKDAG/hashkey-custody-api-docs'>Documentation</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='45fa4e00db'>介绍</h1>
-<p>Hashkey Custody 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 <a href="https://github.com/nbltrust/hashkey-custody-sdk-nodejs">NodeJs SDK</a>, <a href="https://github.com/nbltrust/hashkey-custody-sdk-go">Go SDK</a>, <a href="https://github.com/nbltrust/jadepool-saas-sdk-java">Java SDK</a>接口。我们提供 2 个级别的 API, 管理API 和 钱包API。</p>
+<p>Hashkey Custody 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 <a href="https://github.com/HKDAG/hashkey-custody-sdk-nodejs.git">NodeJs SDK</a>, <a href="https://github.com/HKDAG/hashkey-custody-sdk-go.git">Go SDK</a>, <a href="https://github.com/HKDAG/jadepool-saas-sdk-java.git">Java SDK</a>接口。我们提供 2 个级别的 API, 管理API 和 钱包API。</p>
 
 <p>管理 API 可以实现以下功能:</p>
 
@@ -910,13 +921,17 @@ data:
       <span class="s2">"balance"</span>: <span class="s2">"10001.225"</span>,
       <span class="s2">"money"</span>: <span class="s2">"98175466.911631525"</span>,
       <span class="s2">"name"</span>: <span class="s2">"BTC"</span>,
-      <span class="s2">"price"</span>: <span class="s2">"9816.344189"</span>
+      <span class="s2">"price"</span>: <span class="s2">"9816.344189"</span>,
+      <span class="s2">"outLocked"</span>: <span class="s2">"11.2"</span>,
+      <span class="s2">"inLocked"</span>: <span class="s2">"11.2"</span>
     <span class="o">}</span>,
     <span class="o">{</span>
       <span class="s2">"balance"</span>: <span class="s2">"1.0"</span>,
       <span class="s2">"money"</span>: <span class="s2">"246.565827"</span>,
       <span class="s2">"name"</span>: <span class="s2">"ETH"</span>,
-      <span class="s2">"price"</span>: <span class="s2">"246.565827"</span>
+      <span class="s2">"price"</span>: <span class="s2">"246.565827"</span>,
+      <span class="s2">"outLocked"</span>: <span class="s2">"11.2"</span>,
+      <span class="s2">"inLocked"</span>: <span class="s2">"11.2"</span>
     <span class="o">}</span>
   <span class="o">]</span>,
   <span class="s2">"total"</span>: <span class="s2">"98175713.477458525"</span>
@@ -988,22 +1003,32 @@ data:
 <tr>
 <td>balance</td>
 <td>string</td>
-<td>the coin balance</td>
+<td>币种余额</td>
 </tr>
 <tr>
 <td>money</td>
 <td>string</td>
-<td>the amount(USD) equal to the balance</td>
+<td>币种余额对应的美元价值</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>the coin name</td>
+<td>币种名称</td>
 </tr>
 <tr>
 <td>price</td>
 <td>string</td>
-<td>the coin price(USD)</td>
+<td>币种价格(USD)</td>
+</tr>
+<tr>
+<td>outLocked</td>
+<td>string</td>
+<td>币种转出锁定余额</td>
+</tr>
+<tr>
+<td>inLocked</td>
+<td>string</td>
+<td>币种转入锁定余额</td>
 </tr>
 </tbody></table>
 <h3 id='4fdde8d3c3'>添加钱包资产</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"AddAsset"</span> <span class="s2">"BTC"</span>
@@ -1548,6 +1573,102 @@ data:
 <td>the total count of orders</td>
 </tr>
 </tbody></table>
+
+<p>order:</p>
+
+<table><thead>
+<tr>
+<th>值</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bizType</td>
+<td>string</td>
+<td>订单类型</td>
+</tr>
+<tr>
+<td>block</td>
+<td>number</td>
+<td>区块高度</td>
+</tr>
+<tr>
+<td>coinName</td>
+<td>string</td>
+<td>币种名称</td>
+</tr>
+<tr>
+<td>confirmations</td>
+<td>number</td>
+<td>交易确认数</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>交易费用</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>交易输入</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>订单ID</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>string</td>
+<td>memo</td>
+</tr>
+<tr>
+<td>n</td>
+<td>number</td>
+<td>订单索引</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>订单状态</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>交易输出</td>
+</tr>
+<tr>
+<td>txid</td>
+<td>string</td>
+<td>交易哈希</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>币种类型</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>交易值</td>
+</tr>
+<tr>
+<td>note</td>
+<td>string</td>
+<td>订单备注</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>转账消息</td>
+</tr>
+<tr>
+<td>relatedOrderId</td>
+<td>string</td>
+<td>关联订单ID</td>
+</tr>
+</tbody></table>
 <h3 id='402f86af78'>获取钱包单笔订单</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span>
 code: 0
 message: success
@@ -1623,82 +1744,87 @@ data:
 <tr>
 <td>bizType</td>
 <td>string</td>
-<td>order type</td>
+<td>订单类型</td>
 </tr>
 <tr>
 <td>block</td>
 <td>number</td>
-<td>the block transaction mined in</td>
+<td>区块高度</td>
 </tr>
 <tr>
 <td>coinName</td>
 <td>string</td>
-<td>unique token name</td>
+<td>币种名称</td>
 </tr>
 <tr>
 <td>confirmations</td>
 <td>number</td>
-<td>number of transaction confirmations</td>
+<td>交易确认数</td>
 </tr>
 <tr>
 <td>fee</td>
 <td>string</td>
-<td>fee burnt for the transaction</td>
+<td>交易费用</td>
 </tr>
 <tr>
 <td>from</td>
 <td>string</td>
-<td>transaction input</td>
+<td>交易输入</td>
 </tr>
 <tr>
 <td>id</td>
 <td>string</td>
-<td>order id</td>
+<td>订单ID</td>
 </tr>
 <tr>
 <td>memo</td>
 <td>string</td>
-<td>order memo</td>
+<td>memo</td>
 </tr>
 <tr>
 <td>n</td>
 <td>number</td>
-<td>order index</td>
+<td>订单索引</td>
 </tr>
 <tr>
 <td>state</td>
 <td>string</td>
-<td>order state</td>
+<td>订单状态</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
-<td>transaction output</td>
+<td>交易输出</td>
 </tr>
 <tr>
 <td>txid</td>
 <td>string</td>
-<td>transaction hash</td>
+<td>交易哈希</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>token type</td>
+<td>币种类型</td>
 </tr>
 <tr>
 <td>value</td>
 <td>string</td>
-<td>transaction value</td>
+<td>交易值</td>
 </tr>
 <tr>
 <td>note</td>
 <td>string</td>
-<td>order note</td>
+<td>订单备注</td>
 </tr>
 <tr>
 <td>message</td>
 <td>string</td>
-<td>message to recipient of transfer</td>
+<td>转账消息</td>
+</tr>
+<tr>
+<td>relatedOrderId</td>
+<td>string</td>
+<td>关联订单ID</td>
 </tr>
 </tbody></table>
 <h3 id='07bb09a568'>更新钱包订单</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"UpdateOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span> <span class="s2">"123"</span>
@@ -2987,6 +3113,723 @@ data:
 </tr>
 </thead><tbody>
 </tbody></table>
+<h2 id='4613903460'>财务</h2><h3 id='36e0803c31'>收入与支出</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFinanceOrders"</span> <span class="s2">"1"</span> <span class="s2">"10"</span> <span class="s2">"https://stg-xpert.hashkeydev.com/saas-api"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"orders"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"amount"</span>: <span class="s2">"0.100000000000000000"</span>,
+      <span class="s2">"balance"</span>: <span class="s2">"2.000000000000000000"</span>,
+      <span class="s2">"bizOrderID"</span>: <span class="s2">"ordersxv3z41mwyglorr0gnl2keop5"</span>,
+      <span class="s2">"bizType"</span>: <span class="s2">"DEPOSIT"</span>,
+      <span class="s2">"coinName"</span>: <span class="s2">"USDT"</span>,
+      <span class="s2">"createdAt"</span>: 1737014596,
+      <span class="s2">"exchangeID"</span>: <span class="s2">""</span>,
+      <span class="s2">"exchangeName"</span>: <span class="s2">""</span>,
+      <span class="s2">"from"</span>: <span class="s2">"0x53f1F06D87683c7443B316DFD994ff1562313888"</span>,
+      <span class="s2">"fromType"</span>: <span class="s2">"ADDRESS"</span>,
+      <span class="s2">"id"</span>: <span class="s2">"finorderkewm30o8568p8l9j79qp12zn"</span>,
+      <span class="s2">"note"</span>: <span class="s2">""</span>,
+      <span class="s2">"operator"</span>: <span class="s2">""</span>,
+      <span class="s2">"opsType"</span>: <span class="s2">"ADMIN"</span>,
+      <span class="s2">"subType"</span>: <span class="s2">"DEPOSIT"</span>,
+      <span class="s2">"to"</span>: <span class="s2">"0xf128c288b92009CED44D654cDfc111Dc5248cBEE"</span>,
+      <span class="s2">"toType"</span>: <span class="s2">"ADDRESS"</span>,
+      <span class="s2">"fee"</span>: <span class="s2">"0.000000000000000000"</span>,
+      <span class="s2">"txid"</span>: <span class="s2">"0x3610d05727fa0ff997653e54c69df8c3065b15dd9744130b9887151d58f29507"</span>,
+      <span class="s2">"updatedAt"</span>: 1737014709,
+      <span class="s2">"walletID"</span>: <span class="s2">"walletylr07eg5r4j2mkpw"</span>,
+      <span class="s2">"walletName"</span>: <span class="s2">"wallet2"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"total"</span>: 1
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">company</span><span class="o">.</span><span class="n">GetFinanceOrders</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{}{</span>
+        <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
+    <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
+    <span class="p">})</span>
+</code></pre></div><h4 id='http-25'>HTTP请求</h4>
+<p><code>GET /api/v1/finance/orders</code> </p>
+
+<blockquote>
+<p>下载Excel文件：<code>GET /api/v1/finance/orders/download</code></p>
+</blockquote>
+
+<p><strong>参数</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>描述</th>
+<th>是否必需</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>wallets</td>
+<td>query</td>
+<td>钱包id列表,多个值使用逗号分割</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>bizTypes</td>
+<td>query</td>
+<td>类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>subType</td>
+<td>query</td>
+<td>子类型：<br>入账-IN<br>出账-OUT</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>coins</td>
+<td>query</td>
+<td>token列表（多个使用逗号分隔）</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>start</td>
+<td>query</td>
+<td>开始时间戳（秒）</td>
+<td>是</td>
+<td>number</td>
+</tr>
+<tr>
+<td>end</td>
+<td>query</td>
+<td>结束时间戳（秒</td>
+<td>是</td>
+<td>number</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>分页（起始值为1）</td>
+<td>否</td>
+<td>number</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>分页数量</td>
+<td>否</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应结果</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.106000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.430999300000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bizOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ordersmq41ndkz1232323232r"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bizType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WITHDRAW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coinName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733971691</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchangeID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchangeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x510F4a8CC103E0F17915A7630F1524Bb9AF01aB6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDRESS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"finorder40ymrp87zgywpw4jlqd95e2w"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34343"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x4511@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"opsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADMIN"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WITHDRAW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x035221cF1bDcCd8100531B6B6132323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDRESS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x01921175f4986bf3bafd2a16a61b886cf12323232323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733971965</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"walletID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletw5l729323232323"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"walletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_WALLET"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>状态码 <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» orders</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>订单列表</td>
+</tr>
+<tr>
+<td>»»» amount</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>数量</td>
+</tr>
+<tr>
+<td>»»» fee</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>手续费</td>
+</tr>
+<tr>
+<td>»»» balance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>余额</td>
+</tr>
+<tr>
+<td>»»» bizOrderID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>业务订单id</td>
+</tr>
+<tr>
+<td>»»» bizType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转</td>
+</tr>
+<tr>
+<td>»»» coinName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>币种</td>
+</tr>
+<tr>
+<td>»»» createdAt</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>»»» exchangeID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>交易所id</td>
+</tr>
+<tr>
+<td>»»» exchangeName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>交易所名称</td>
+</tr>
+<tr>
+<td>»»» from</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>来源</td>
+</tr>
+<tr>
+<td>»»» fromType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>来源类型</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>订单id</td>
+</tr>
+<tr>
+<td>»»» note</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>»»» operator</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>操作人</td>
+</tr>
+<tr>
+<td>»»» opsType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>操作类型：ADMIN-管理员操作，API-系统操作</td>
+</tr>
+<tr>
+<td>»»» subType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>子类型：<br>WITHDRAW-提币<br>DEPOSIT-充值<br>TRANSFER_OUT-划转出<br>TRANSFER_IN-划入</td>
+</tr>
+<tr>
+<td>»»» to</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>目标地址或钱包名字</td>
+</tr>
+<tr>
+<td>»»» toType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>目标类型: ADDRESS-地址，WALLET-钱包</td>
+</tr>
+<tr>
+<td>»»» txid</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>交易Hash</td>
+</tr>
+<tr>
+<td>»»» updatedAt</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>更新时间戳（秒）</td>
+</tr>
+<tr>
+<td>»»» walletID</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包id</td>
+</tr>
+<tr>
+<td>»»» walletName</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包名称</td>
+</tr>
+<tr>
+<td>»» total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>总数量</td>
+</tr>
+</tbody></table>
+<h3 id='986aedb65a'>财务报表</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFinanceOrders"</span> <span class="s2">"1"</span> <span class="s2">"10"</span> <span class="s2">"https://stg-xpert.hashkeydev.com/saas-api"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"reports"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+          <span class="s2">"coin"</span>: <span class="s2">"USDT-ERC20"</span>,
+          <span class="s2">"deposit"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"depositCount"</span>: 0,
+          <span class="s2">"endingBalance"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanPurchase"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanPurchaseCount"</span>: 0,
+          <span class="s2">"loanSettle"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"loanSettleCount"</span>: 0,
+          <span class="s2">"openingBalance"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"price"</span>: 1.0002579083,
+          <span class="s2">"priceDeposit"</span>: 0,
+          <span class="s2">"priceEndingBalance"</span>: 0,
+          <span class="s2">"priceLoanPurchase"</span>: 0,
+          <span class="s2">"priceLoanSettle"</span>: 0,
+          <span class="s2">"priceOpeningBalance"</span>: 0,
+          <span class="s2">"priceTransferIn"</span>: 0,
+          <span class="s2">"priceWithdraw"</span>: 0,
+          <span class="s2">"time"</span>: <span class="s2">"2024/10/18"</span>,
+          <span class="s2">"transferIn"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"wallet"</span>: <span class="o">{</span>
+              <span class="s2">"id"</span>: <span class="s2">"walletw5l729jn4mgy0843"</span>,
+              <span class="s2">"name"</span>: <span class="s2">"HBLHSK"</span>
+          <span class="o">}</span>,
+          <span class="s2">"withdraw"</span>: <span class="s2">"0.000000000000000000"</span>,
+          <span class="s2">"withdrawCount"</span>: 0
+      <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"total"</span>: 1
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">company</span><span class="o">.</span><span class="n">GetFinanceReport</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{}{</span>
+        <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
+    <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
+    <span class="p">})</span>
+</code></pre></div><h4 id='http-26'>HTTP请求</h4>
+<p><code>GET /api/v1/finance/reports</code> </p>
+
+<blockquote>
+<p>下载Excel文件：<code>GET /api/v1/finance/reports/download</code></p>
+</blockquote>
+
+<p><strong>参数</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>描述</th>
+<th>是否必需</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>wallets</td>
+<td>query</td>
+<td>钱包id列表,多个值使用逗号分割</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>query</td>
+<td>DAILY-日报<br>MONTHLY-月报<br>ANNUAL-年报</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>coins</td>
+<td>query</td>
+<td>token列表（多个使用逗号分隔）</td>
+<td>否</td>
+<td>string</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>query</td>
+<td>开始时间(yyyy-MM-dd)</td>
+<td>是</td>
+<td>string</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>query</td>
+<td>结束时间(yyyy-MM-dd)</td>
+<td>是</td>
+<td>string</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>分页（起始值为1）</td>
+<td>否</td>
+<td>number</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>分页数量</td>
+<td>否</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应结果</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"167.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"endingBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.430999300000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanPurchase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanPurchaseCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanSettle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"loanSettleCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openingBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceDeposit"</span><span class="p">:</span><span class="w"> </span><span class="mf">297166.4704650682</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceEndingBalance"</span><span class="p">:</span><span class="w"> </span><span class="mf">18561.336798829732</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLoanPurchase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLoanSettle"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceOpeningBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceTransferIn"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceWithdraw"</span><span class="p">:</span><span class="w"> </span><span class="mf">278605.1336662383</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transferIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletw5l729jn4mgy0843"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HBLHSK"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"withdraw"</span><span class="p">:</span><span class="w"> </span><span class="s2">"156.569000700000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"withdrawCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>状态码 <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» reports</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>报表列表</td>
+</tr>
+<tr>
+<td>»»» coin</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>币种</td>
+</tr>
+<tr>
+<td>»»» deposit</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>充值数量</td>
+</tr>
+<tr>
+<td>»»» depositCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>充值次数</td>
+</tr>
+<tr>
+<td>»»» endingBalance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>余额</td>
+</tr>
+<tr>
+<td>»»» loanPurchase</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>贷款购买数量</td>
+</tr>
+<tr>
+<td>»»» loanPurchaseCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>贷款购买次数</td>
+</tr>
+<tr>
+<td>»»» loanSettle</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>贷款结算数量</td>
+</tr>
+<tr>
+<td>»»» loanSettleCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>贷款结算次数</td>
+</tr>
+<tr>
+<td>»»» openingBalance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>期初余额</td>
+</tr>
+<tr>
+<td>»»» priceDeposit</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>充值价格</td>
+</tr>
+<tr>
+<td>»»» priceEndingBalance</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>余额价格</td>
+</tr>
+<tr>
+<td>»»» priceLoanPurchase</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>贷款购买价格</td>
+</tr>
+<tr>
+<td>»»» priceLoanSettle</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>贷款结算价格</td>
+</tr>
+<tr>
+<td>»»» priceOpeningBalance</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>期初余额价格</td>
+</tr>
+<tr>
+<td>»»» priceTransferIn</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>划入价格</td>
+</tr>
+<tr>
+<td>»»» priceWithdraw</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>提币价格</td>
+</tr>
+<tr>
+<td>»»» time</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>»»» transferIn</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>划入数量</td>
+</tr>
+<tr>
+<td>»»» wallet</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>钱包</td>
+</tr>
+<tr>
+<td>»»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包id</td>
+</tr>
+<tr>
+<td>»»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包名称</td>
+</tr>
+<tr>
+<td>»»» withdraw</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>提币数量</td>
+</tr>
+<tr>
+<td>»»» withdrawCount</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>提币次数</td>
+</tr>
+<tr>
+<td>»» total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>总数量</td>
+</tr>
+</tbody></table>
 <h1 id='c76b97433d'>回调</h1><h2 id='81b3798beb'>订单</h2>
 <blockquote>
 <p>订单通知发送的 JSON 结构如下:</p>
@@ -3008,7 +3851,8 @@ data:
   </span><span class="nl">"block"</span><span class="p">:</span><span class="w"> </span><span class="mi">13721091</span><span class="p">,</span><span class="w">
   </span><span class="nl">"affirmativeConfirmation"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="nl">"confirmations"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0"</span><span class="w">
+  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>回调结果</strong></p>
@@ -3023,87 +3867,92 @@ data:
 <tr>
 <td>id</td>
 <td>string</td>
-<td>the order ID</td>
+<td>订单ID</td>
 </tr>
 <tr>
 <td>withdrawID</td>
 <td>string</td>
-<td>withdraw id</td>
+<td>提币ID</td>
 </tr>
 <tr>
 <td>coinName</td>
 <td>string</td>
-<td>unique token name</td>
+<td>币种名称</td>
 </tr>
 <tr>
 <td>txid</td>
 <td>string</td>
-<td>transaction hash</td>
+<td>交易哈希</td>
 </tr>
 <tr>
 <td>state</td>
 <td>string</td>
-<td>order state</td>
+<td>订单状态</td>
 </tr>
 <tr>
 <td>bizType</td>
 <td>string</td>
-<td>order type</td>
+<td>订单类型</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>token type</td>
+<td>币种类型</td>
 </tr>
 <tr>
 <td>from</td>
 <td>string</td>
-<td>transaction input</td>
+<td>交易输入</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
-<td>transaction output</td>
+<td>交易输出</td>
 </tr>
 <tr>
 <td>value</td>
 <td>string</td>
-<td>transaction value</td>
+<td>交易值</td>
 </tr>
 <tr>
 <td>affirmativeConfirmation</td>
 <td>number</td>
-<td>affirmative confirmation of the blockchain</td>
+<td>区块链确认数</td>
 </tr>
 <tr>
 <td>confirmations</td>
 <td>number</td>
-<td>number of transaction confirmations</td>
+<td>交易确认数</td>
 </tr>
 <tr>
 <td>fee</td>
 <td>string</td>
-<td>fee burnt for the transaction</td>
+<td>交易费用</td>
 </tr>
 <tr>
 <td>block</td>
 <td>number</td>
-<td>the block transaction mined in</td>
+<td>区块高度</td>
 </tr>
 <tr>
 <td>memo</td>
 <td>string</td>
-<td>order note, editable on admin</td>
+<td>订单备注</td>
 </tr>
 <tr>
 <td>n</td>
 <td>number</td>
-<td>the order index</td>
+<td>订单索引</td>
 </tr>
 <tr>
 <td>sign</td>
 <td>string</td>
-<td>hex string, sign parameters with HMACSHA256</td>
+<td>签名</td>
+</tr>
+<tr>
+<td>relatedOrderID</td>
+<td>string</td>
+<td>关联订单ID</td>
 </tr>
 </tbody></table>
 <h3 id='8ba46c43fe'>签名</h3>
