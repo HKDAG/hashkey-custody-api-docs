@@ -390,6 +390,9 @@
                           <li>
                             <a href="#transfer" class="toc-h3 toc-link" data-title="transfer">transfer</a>
                           </li>
+                          <li>
+                            <a href="#refund" class="toc-h3 toc-link" data-title="refund">refund</a>
+                          </li>
                       </ul>
                   </li>
                   <li>
@@ -2378,10 +2381,167 @@ data:
 <td>transfer message</td>
 </tr>
 </tbody></table>
+<h3 id='refund'>refund</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+</code></pre></div>
+<p><strong>Summary:</strong> refund</p>
+<h4 id='http-request-17'>HTTP Request</h4>
+<p><code>POST /api/v1/app/refund</code> </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-App-Key</td>
+<td>header</td>
+<td>app key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>depositOrderId</td>
+<td>body</td>
+<td>deposit order id</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>id</td>
+<td>body</td>
+<td>refund order id</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>to</td>
+<td>body</td>
+<td>refund address</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>body</td>
+<td>address memo</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>note</td>
+<td>body</td>
+<td>refund note</td>
+<td>No</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Result</strong></p>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hashID</td>
+<td>string</td>
+<td>refund order hashID</td>
+</tr>
+<tr>
+<td>appID</td>
+<td>number</td>
+<td>app id</td>
+</tr>
+<tr>
+<td>companyID</td>
+<td>number</td>
+<td>company id</td>
+</tr>
+<tr>
+<td>appkeyID</td>
+<td>number</td>
+<td>appkey id</td>
+</tr>
+<tr>
+<td>accountID</td>
+<td>number</td>
+<td>account id</td>
+</tr>
+<tr>
+<td>sourceOrderId</td>
+<td>number</td>
+<td>deposit order id</td>
+</tr>
+<tr>
+<td>sourceOrderHash</td>
+<td>string</td>
+<td>deposit order hash</td>
+</tr>
+<tr>
+<td>refundOrderId</td>
+<td>number</td>
+<td>refund order id</td>
+</tr>
+<tr>
+<td>refundOrderHash</td>
+<td>string</td>
+<td>refund order hash</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>refund address</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>string</td>
+<td>address memo</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>refund amount</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>refund fee</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>refund status</td>
+</tr>
+<tr>
+<td>opsType</td>
+<td>string</td>
+<td>refund type</td>
+</tr>
+<tr>
+<td>note</td>
+<td>string</td>
+<td>refund note</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>refund reason</td>
+</tr>
+</tbody></table>
 <h2 id='white-list'>White list</h2><h3 id='add-white-address'>add white address</h3><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">AddWhiteAddress</span><span class="p">(</span><span class="s">"ETH"</span><span class="p">,</span> <span class="s">"address"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>add withdraw/deposite white address</strong></p>
-<h4 id='http-request-17'>HTTP Request</h4>
+<h4 id='http-request-18'>HTTP Request</h4>
 <p><code>POST /api/v1/address/whitelist/add</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2448,7 +2608,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getMarket</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get the asset price by USD</p>
-<h4 id='http-request-18'>HTTP Request</h4>
+<h4 id='http-request-19'>HTTP Request</h4>
 <p><code>GET /api/v1/market/{coinName}</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2502,7 +2662,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get system current timestamp</p>
-<h4 id='http-request-19'>HTTP Request</h4>
+<h4 id='http-request-20'>HTTP Request</h4>
 <p><code>GET /api/v1/system/time</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2572,7 +2732,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">createWallet</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"password"</span><span class="o">,</span> <span class="s">"https://noti.domain/callback"</span><span class="o">,</span> <span class="s">"description"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> create a general wallet</p>
-<h4 id='http-request-20'>HTTP Request</h4>
+<h4 id='http-request-21'>HTTP Request</h4>
 <p><code>POST /api/v1/app</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2673,7 +2833,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">getWalletKeys</span><span class="o">(</span><span class="s">"appID"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get appkeys(include appsecret)</p>
-<h4 id='http-request-21'>HTTP Request</h4>
+<h4 id='http-request-22'>HTTP Request</h4>
 <p><code>GET /api/v1/app/{appID}/keys</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2760,7 +2920,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">updateWalletKey</span><span class="o">(</span><span class="s">"appKey"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> update appkey attributes</p>
-<h4 id='http-request-22'>HTTP Request</h4>
+<h4 id='http-request-23'>HTTP Request</h4>
 <p><code>PUT /api/v1/appKey/{appKey}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2844,7 +3004,7 @@ data:
         <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
     <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
     <span class="p">})</span>
-</code></pre></div><h4 id='http-request-23'>HTTP Request</h4>
+</code></pre></div><h4 id='http-request-24'>HTTP Request</h4>
 <p><code>GET /api/v1/finance/orders</code> </p>
 
 <blockquote>

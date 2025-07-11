@@ -384,6 +384,9 @@
                           <li>
                             <a href="#1045de04a1" class="toc-h3 toc-link" data-title="划转">划转</a>
                           </li>
+                          <li>
+                            <a href="#b82ef83b7f" class="toc-h3 toc-link" data-title="退款">退款</a>
+                          </li>
                       </ul>
                   </li>
                   <li>
@@ -2247,6 +2250,163 @@ data:
 <td>transfer message</td>
 </tr>
 </tbody></table>
+<h3 id='b82ef83b7f'>退款</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+</code></pre></div>
+<p><strong>总结:</strong> 退款</p>
+<h4 id='http-15'>HTTP请求</h4>
+<p><code>POST /api/v1/app/refund</code> </p>
+
+<p><strong>参数</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>描述</th>
+<th>是否必需</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-App-Key</td>
+<td>header</td>
+<td>app key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>depositOrderId</td>
+<td>body</td>
+<td>充值订单id</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>id</td>
+<td>body</td>
+<td>退款订单自定义id</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>to</td>
+<td>body</td>
+<td>退款地址</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>body</td>
+<td>地址memo</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>note</td>
+<td>body</td>
+<td>退款备注</td>
+<td>No</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应结果</strong></p>
+
+<table><thead>
+<tr>
+<th>值</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hashID</td>
+<td>string</td>
+<td>退款订单hashID</td>
+</tr>
+<tr>
+<td>appID</td>
+<td>number</td>
+<td>应用id</td>
+</tr>
+<tr>
+<td>companyID</td>
+<td>number</td>
+<td>公司id</td>
+</tr>
+<tr>
+<td>appkeyID</td>
+<td>number</td>
+<td>appkey id</td>
+</tr>
+<tr>
+<td>accountID</td>
+<td>number</td>
+<td>账户id</td>
+</tr>
+<tr>
+<td>sourceOrderId</td>
+<td>number</td>
+<td>充值订单id</td>
+</tr>
+<tr>
+<td>sourceOrderHash</td>
+<td>string</td>
+<td>充值订单hash</td>
+</tr>
+<tr>
+<td>refundOrderId</td>
+<td>number</td>
+<td>退款订单id</td>
+</tr>
+<tr>
+<td>refundOrderHash</td>
+<td>string</td>
+<td>退款订单hash</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>退款地址</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>string</td>
+<td>地址memo</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>退款金额</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>退款手续费</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>退款状态</td>
+</tr>
+<tr>
+<td>opsType</td>
+<td>string</td>
+<td>退款类型</td>
+</tr>
+<tr>
+<td>note</td>
+<td>string</td>
+<td>退款备注</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>退款原因</td>
+</tr>
+</tbody></table>
 <h2 id='a8a40acd93'>质押</h2><h3 id='validators'>获取质押validators</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetValidators"</span> <span class="s2">"IRIS"</span>
 code: 0
 message: success
@@ -2298,7 +2458,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getValidators</span><span class="o">(</span><span class="s">"IRIS"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 获取质押validators</p>
-<h4 id='http-15'>HTTP请求</h4>
+<h4 id='http-16'>HTTP请求</h4>
 <p><code>GET /api/v1/staking/{coinName}/validators</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2366,7 +2526,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">delegate</span><span class="o">(</span><span class="s">"1569231558"</span><span class="o">,</span> <span class="s">"IRIS2"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 抵押</p>
-<h4 id='http-16'>HTTP请求</h4>
+<h4 id='http-17'>HTTP请求</h4>
 <p><code>POST /api/v1/staking/{coinName}/delegate</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2458,7 +2618,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">unDelegate</span><span class="o">(</span><span class="s">"1569231809"</span><span class="o">,</span> <span class="s">"IRIS2"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 解抵押</p>
-<h4 id='http-17'>HTTP请求</h4>
+<h4 id='http-18'>HTTP请求</h4>
 <p><code>POST /api/v1/staking/{coinName}/undelegate</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2547,7 +2707,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">addUrgentStakingFunding</span><span class="o">(</span><span class="s">"1569292076"</span><span class="o">,</span> <span class="s">"IRIS2"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">,</span> <span class="mi">1569302076</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 添加资金需求</p>
-<h4 id='http-18'>HTTP请求</h4>
+<h4 id='http-19'>HTTP请求</h4>
 <p><code>POST /api/v1/staking/{coinName}/funding</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2627,7 +2787,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getStakingInterest</span><span class="o">(</span><span class="s">"IRIS"</span><span class="o">,</span> <span class="s">"2019-09-26"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 获取质押利息</p>
-<h4 id='http-19'>HTTP请求</h4>
+<h4 id='http-20'>HTTP请求</h4>
 <p><code>GET /api/v1/staking/{coinName}/interest</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2754,7 +2914,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getMarket</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 获取以USD计价的资产价格</p>
-<h4 id='http-20'>HTTP请求</h4>
+<h4 id='http-21'>HTTP请求</h4>
 <p><code>GET /api/v1/market/{coinName}</code></p>
 
 <p><strong>参数</strong></p>
@@ -2808,7 +2968,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>总结:</strong> 获取系统当前时间戳</p>
-<h4 id='http-21'>HTTP请求</h4>
+<h4 id='http-22'>HTTP请求</h4>
 <p><code>GET /api/v1/system/time</code></p>
 
 <p><strong>参数</strong></p>
@@ -2878,7 +3038,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">createWallet</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"password"</span><span class="o">,</span> <span class="s">"https://noti.domain/callback"</span><span class="o">,</span> <span class="s">"description"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 创建钱包</p>
-<h4 id='http-22'>HTTP请求</h4>
+<h4 id='http-23'>HTTP请求</h4>
 <p><code>POST /api/v1/app</code> </p>
 
 <p><strong>参数</strong></p>
@@ -2979,7 +3139,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">getWalletKeys</span><span class="o">(</span><span class="s">"appID"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 获取 appkeys(包括 appsecret)</p>
-<h4 id='http-23'>HTTP请求</h4>
+<h4 id='http-24'>HTTP请求</h4>
 <p><code>GET /api/v1/app/{appID}/keys</code> </p>
 
 <p><strong>参数</strong></p>
@@ -3066,7 +3226,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">updateWalletKey</span><span class="o">(</span><span class="s">"appKey"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>总结:</strong> 更新appkey属性</p>
-<h4 id='http-24'>HTTP请求</h4>
+<h4 id='http-25'>HTTP请求</h4>
 <p><code>PUT /api/v1/appKey/{appKey}</code> </p>
 
 <p><strong>参数</strong></p>
@@ -3150,7 +3310,7 @@ data:
         <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
     <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
     <span class="p">})</span>
-</code></pre></div><h4 id='http-25'>HTTP请求</h4>
+</code></pre></div><h4 id='http-26'>HTTP请求</h4>
 <p><code>GET /api/v1/finance/orders</code> </p>
 
 <blockquote>
@@ -3509,7 +3669,7 @@ data:
         <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
     <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
     <span class="p">})</span>
-</code></pre></div><h4 id='http-26'>HTTP请求</h4>
+</code></pre></div><h4 id='http-27'>HTTP请求</h4>
 <p><code>GET /api/v1/finance/reports</code> </p>
 
 <blockquote>
