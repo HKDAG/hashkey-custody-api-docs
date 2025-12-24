@@ -9,7 +9,7 @@ language_tabs:
    - java
 
 toc_footers: 
-   - <a href='https://github.com/nbltrust/hashkey-custody-api-docs'>Documentation</a>
+   - <a href='https://github.com/HKDAG/hashkey-custody-api-docs'>Documentation</a>
 
 includes:
   - errors
@@ -20,7 +20,7 @@ search: true
 
 # 介绍
 
-Hashkey Custody 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 [NodeJs SDK](https://github.com/nbltrust/hashkey-custody-sdk-nodejs), [Go SDK](https://github.com/nbltrust/hashkey-custody-sdk-go), [Java SDK](https://github.com/nbltrust/jadepool-saas-sdk-java)接口。我们提供 2 个级别的 API, 管理API 和 钱包API。
+Hashkey Custody 提供了一个简单而强大的 RESTful API 和客户端 SDK ，以将数字货币钱包与用户的应用程序集成在一起。欢迎查看我们的 [NodeJs SDK](https://github.com/HKDAG/hashkey-custody-sdk-nodejs.git), [Go SDK](https://github.com/HKDAG/hashkey-custody-sdk-go.git), [Java SDK](https://github.com/HKDAG/jadepool-saas-sdk-java.git)接口。我们提供 2 个级别的 API, 管理API 和 钱包API。
 
 管理 API 可以实现以下功能:
 
@@ -344,13 +344,17 @@ data:
       "balance": "10001.225",
       "money": "98175466.911631525",
       "name": "BTC",
-      "price": "9816.344189"
+      "price": "9816.344189",
+      "outLocked": "11.2",
+      "inLocked": "11.2"
     },
     {
       "balance": "1.0",
       "money": "246.565827",
       "name": "ETH",
-      "price": "246.565827"
+      "price": "246.565827",
+      "outLocked": "11.2",
+      "inLocked": "11.2"
     }
   ],
   "total": "98175713.477458525"
@@ -397,10 +401,12 @@ balances | array | the wallet balance list
 
 值 | 类型 | 描述
 --------- | ------- | ---------
-balance | string | the coin balance
-money | string | the amount(USD) equal to the balance
-name | string | the coin name
-price | string | the coin price(USD)
+balance | string | 币种余额
+money | string | 币种余额对应的美元价值
+name | string | 币种名称
+price | string | 币种价格(USD)
+outLocked | string | 币种转出锁定余额
+inLocked | string | 币种转入锁定余额
 
 ### 添加钱包资产
 
@@ -724,6 +730,29 @@ data:
 orders | array | order list
 totalAmount | number | the total count of orders
 
+order:
+
+
+值 | 类型 | 描述
+--------- | ------- | ---------
+bizType | string | 订单类型
+block | number | 区块高度
+coinName | string | 币种名称
+confirmations | number | 交易确认数
+fee | string | 交易费用
+from | string | 交易输入
+id | string | 订单ID
+memo | string | memo
+n | number | 订单索引
+state | string | 订单状态
+to | string | 交易输出
+txid | string | 交易哈希
+type | string | 币种类型
+value | string | 交易值
+note | string | 订单备注
+message | string | 转账消息
+relatedOrderId | string | 关联订单ID
+
 ### 获取钱包单笔订单
 
 ```shell
@@ -785,22 +814,23 @@ data:
 
 值 | 类型 | 描述
 --------- | ------- | ---------
-bizType | string | order type
-block | number | the block transaction mined in
-coinName | string | unique token name
-confirmations | number | number of transaction confirmations
-fee | string | fee burnt for the transaction
-from | string | transaction input
-id | string | order id
-memo | string | order memo
-n | number | order index
-state | string | order state
-to | string | transaction output
-txid | string | transaction hash
-type | string | token type
-value | string | transaction value
-note | string | order note
-message | string | message to recipient of transfer
+bizType | string | 订单类型
+block | number | 区块高度
+coinName | string | 币种名称
+confirmations | number | 交易确认数
+fee | string | 交易费用
+from | string | 交易输入
+id | string | 订单ID
+memo | string | memo
+n | number | 订单索引
+state | string | 订单状态
+to | string | 交易输出
+txid | string | 交易哈希
+type | string | 币种类型
+value | string | 交易值
+note | string | 订单备注
+message | string | 转账消息
+relatedOrderId | string | 关联订单ID
 
 ### 更新钱包订单
 
@@ -1551,6 +1581,281 @@ data:
 值 | 类型 | 描述
 --------- | ------- | ---------
 
+## 财务
+### 收入与支出
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFinanceOrders" "1" "10" "https://stg-xpert.hashkeydev.com/saas-api"
+code: 0
+message: success
+data:
+{
+  "orders": [
+    {
+      "amount": "0.100000000000000000",
+      "balance": "2.000000000000000000",
+      "bizOrderID": "ordersxv3z41mwyglorr0gnl2keop5",
+      "bizType": "DEPOSIT",
+      "coinName": "USDT",
+      "createdAt": 1737014596,
+      "exchangeID": "",
+      "exchangeName": "",
+      "from": "0x53f1F06D87683c7443B316DFD994ff1562313888",
+      "fromType": "ADDRESS",
+      "id": "finorderkewm30o8568p8l9j79qp12zn",
+      "note": "",
+      "operator": "",
+      "opsType": "ADMIN",
+      "subType": "DEPOSIT",
+      "to": "0xf128c288b92009CED44D654cDfc111Dc5248cBEE",
+      "toType": "ADDRESS",
+      "fee": "0.000000000000000000",
+      "txid": "0x3610d05727fa0ff997653e54c69df8c3065b15dd9744130b9887151d58f29507",
+      "updatedAt": 1737014709,
+      "walletID": "walletylr07eg5r4j2mkpw",
+      "walletName": "wallet2"
+    }
+  ],
+  "total": 1
+}
+```
+
+```go
+	result, _ = company.GetFinanceOrders(map[string]interface{}{
+		"page":1,
+    "pageSize":10
+	})
+```
+
+#### HTTP请求 
+`GET /api/v1/finance/orders` 
+
+> 下载Excel文件：`GET /api/v1/finance/orders/download`
+
+**参数**
+
+| 名称 | 位置 | 描述| 是否必需| 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+|wallets|query|钱包id列表,多个值使用逗号分割| 否 |string|
+|bizTypes|query|类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER| 否 |string|
+|subType|query|子类型：<br>入账-IN<br>出账-OUT| 否 |string|
+|coins|query|token列表（多个使用逗号分隔）| 否 |string|
+|start|query|开始时间戳（秒）| 是 |number|
+|end|query|结束时间戳（秒| 是 |number|
+|page|query|分页（起始值为1）| 否 |number|
+|pageSize|query|分页数量| 否 |number|
+
+**响应结果**
+
+```json
+{
+  "code": 0,
+  "data": {
+    "orders": [
+      {
+        "amount": "0.106000000000000000",
+        "fee": "0.000000000000000000",
+        "balance": "10.430999300000000000",
+        "bizOrderID": "ordersmq41ndkz1232323232r",
+        "bizType": "WITHDRAW",
+        "coinName": "BTC",
+        "createdAt": 1733971691,
+        "exchangeID": "",
+        "exchangeName": "",
+        "from": "0x510F4a8CC103E0F17915A7630F1524Bb9AF01aB6",
+        "fromType": "ADDRESS",
+        "id": "finorder40ymrp87zgywpw4jlqd95e2w",
+        "note": "34343",
+        "operator": "0x4511@gmail.com",
+        "opsType": "ADMIN",
+        "subType": "WITHDRAW",
+        "to": "0x035221cF1bDcCd8100531B6B6132323232323",
+        "toType": "ADDRESS",
+        "txid": "0x01921175f4986bf3bafd2a16a61b886cf12323232323232323",
+        "updatedAt": 1733971965,
+        "walletID": "walletw5l729323232323",
+        "walletName": "BTC_WALLET"
+      }
+    ],
+    "total": 1
+  },
+  "message": "success"
+}
+```
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» orders|[object]|true|none|订单列表|
+|»»» amount|string|true|none|数量|
+|»»» fee|string|true|none|手续费|
+|»»» balance|string|true|none|余额|
+|»»» bizOrderID|string|true|none|业务订单id|
+|»»» bizType|string|true|none|类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转|
+|»»» coinName|string|true|none|币种|
+|»»» createdAt|integer|true|none|创建时间|
+|»»» exchangeID|string|true|none|交易所id|
+|»»» exchangeName|string|true|none|交易所名称|
+|»»» from|string|true|none|来源|
+|»»» fromType|string|true|none|来源类型|
+|»»» id|string|true|none|订单id|
+|»»» note|string|true|none|备注|
+|»»» operator|string|true|none|操作人|
+|»»» opsType|string|true|none|操作类型：ADMIN-管理员操作，API-系统操作|
+|»»» subType|string|true|none|子类型：<br>WITHDRAW-提币<br>DEPOSIT-充值<br>TRANSFER_OUT-划转出<br>TRANSFER_IN-划入|
+|»»» to|string|true|none|目标地址或钱包名字|
+|»»» toType|string|true|none|目标类型: ADDRESS-地址，WALLET-钱包|
+|»»» txid|string|true|none|交易Hash|
+|»»» updatedAt|integer|true|none|更新时间戳（秒）|
+|»»» walletID|string|true|none|钱包id|
+|»»» walletName|string|true|none|钱包名称|
+|»» total|integer|true|none|总数量|
+
+
+### 财务报表
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFinanceOrders" "1" "10" "https://stg-xpert.hashkeydev.com/saas-api"
+code: 0
+message: success
+data:
+{
+  "reports": [
+      {
+          "coin": "USDT-ERC20",
+          "deposit": "0.000000000000000000",
+          "depositCount": 0,
+          "endingBalance": "0.000000000000000000",
+          "loanPurchase": "0.000000000000000000",
+          "loanPurchaseCount": 0,
+          "loanSettle": "0.000000000000000000",
+          "loanSettleCount": 0,
+          "openingBalance": "0.000000000000000000",
+          "price": 1.0002579083,
+          "priceDeposit": 0,
+          "priceEndingBalance": 0,
+          "priceLoanPurchase": 0,
+          "priceLoanSettle": 0,
+          "priceOpeningBalance": 0,
+          "priceTransferIn": 0,
+          "priceWithdraw": 0,
+          "time": "2024/10/18",
+          "transferIn": "0.000000000000000000",
+          "wallet": {
+              "id": "walletw5l729jn4mgy0843",
+              "name": "HBLHSK"
+          },
+          "withdraw": "0.000000000000000000",
+          "withdrawCount": 0
+      }
+  ],
+  "total": 1
+}
+```
+
+```go
+	result, _ = company.GetFinanceReport(map[string]interface{}{
+		"page":1,
+    "pageSize":10
+	})
+```
+
+#### HTTP请求 
+`GET /api/v1/finance/reports` 
+
+> 下载Excel文件：`GET /api/v1/finance/reports/download`
+
+**参数**
+
+| 名称 | 位置 | 描述| 是否必需| 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+|wallets|query|钱包id列表,多个值使用逗号分割| 否 |string|
+|type|query|DAILY-日报<br>MONTHLY-月报<br>ANNUAL-年报| 否 |string|
+|coins|query|token列表（多个使用逗号分隔）| 否 |string|
+|startDate|query|开始时间(yyyy-MM-dd)| 是 |string|
+|endDate|query|结束时间(yyyy-MM-dd)| 是 |string|
+|page|query|分页（起始值为1）| 否 |number|
+|pageSize|query|分页数量| 否 |number|
+
+**响应结果**
+
+```json
+{
+    "code": 0,
+    "data": {
+        "reports": [
+            {
+                "coin": "ETH",
+                "deposit": "167.000000000000000000",
+                "depositCount": 5,
+                "endingBalance": "10.430999300000000000",
+                "loanPurchase": "0.000000000000000000",
+                "loanPurchaseCount": 0,
+                "loanSettle": "0.000000000000000000",
+                "loanSettleCount": 0,
+                "openingBalance": "0.000000000000000000",
+                "priceDeposit": 297166.4704650682,
+                "priceEndingBalance": 18561.336798829732,
+                "priceLoanPurchase": 0,
+                "priceLoanSettle": 0,
+                "priceOpeningBalance": 0,
+                "priceTransferIn": 0,
+                "priceWithdraw": 278605.1336662383,
+                "time": "2024",
+                "transferIn": "0.000000000000000000",
+                "wallet": {
+                    "id": "walletw5l729jn4mgy0843",
+                    "name": "HBLHSK"
+                },
+                "withdraw": "156.569000700000000000",
+                "withdrawCount": 37
+            }
+        ],
+        "total": 20
+    },
+    "message": "success"
+}
+```
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» reports|[object]|true|none|报表列表|
+|»»» coin|string|true|none|币种|
+|»»» deposit|string|true|none|充值数量|
+|»»» depositCount|integer|true|none|充值次数|
+|»»» endingBalance|string|true|none|余额|
+|»»» loanPurchase|string|true|none|贷款购买数量|
+|»»» loanPurchaseCount|integer|true|none|贷款购买次数|
+|»»» loanSettle|string|true|none|贷款结算数量|
+|»»» loanSettleCount|integer|true|none|贷款结算次数|
+|»»» openingBalance|string|true|none|期初余额|
+|»»» priceDeposit|number|true|none|充值价格|
+|»»» priceEndingBalance|number|true|none|余额价格|
+|»»» priceLoanPurchase|number|true|none|贷款购买价格|
+|»»» priceLoanSettle|number|true|none|贷款结算价格|
+|»»» priceOpeningBalance|number|true|none|期初余额价格|
+|»»» priceTransferIn|number|true|none|划入价格|
+|»»» priceWithdraw|number|true|none|提币价格|
+|»»» time|string|true|none|时间|
+|»»» transferIn|string|true|none|划入数量|
+|»»» wallet|object|true|none|钱包|
+|»»»» id|string|true|none|钱包id|
+|»»»» name|string|true|none|钱包名称|
+|»»» withdraw|string|true|none|提币数量|
+|»»» withdrawCount|integer|true|none|提币次数|
+|»» total|integer|true|none|总数量|
+
 # 回调
 
 ## 订单
@@ -1574,7 +1879,8 @@ data:
   "block": 13721091,
   "affirmativeConfirmation": 20,
   "confirmations": 27,
-  "sign": "796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0"
+  "sign": "796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0",
+  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo"
 }
 ```
 
@@ -1582,23 +1888,24 @@ data:
 
 值 | 类型 | 描述
 --------- | ------- | ---------
-id | string | the order ID
-withdrawID | string | withdraw id
-coinName | string | unique token name
-txid | string | transaction hash
-state | string | order state
-bizType | string | order type
-type | string | token type
-from | string | transaction input
-to | string | transaction output
-value | string | transaction value
-affirmativeConfirmation | number | affirmative confirmation of the blockchain
-confirmations | number | number of transaction confirmations
-fee | string | fee burnt for the transaction
-block | number | the block transaction mined in
-memo | string | order note, editable on admin
-n | number | the order index
-sign | string | hex string, sign parameters with HMACSHA256
+id | string | 订单ID
+withdrawID | string | 提币ID
+coinName | string | 币种名称
+txid | string | 交易哈希
+state | string | 订单状态
+bizType | string | 订单类型
+type | string | 币种类型
+from | string | 交易输入
+to | string | 交易输出
+value | string | 交易值
+affirmativeConfirmation | number | 区块链确认数
+confirmations | number | 交易确认数
+fee | string | 交易费用
+block | number | 区块高度
+memo | string | 订单备注
+n | number | 订单索引
+sign | string | 签名
+relatedOrderID | string | 关联订单ID
 
 ### 签名
 上面的 sign 参数可以通过下面的方法验证，以保证这个回调结果的发送方身份:
