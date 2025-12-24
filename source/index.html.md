@@ -488,7 +488,7 @@ data:
 Value | Type | Description
 --------- | ------- | ---------
 
-### get wallet signle asset balance 
+### get wallet single asset balance 
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetBalance" "ETH"
@@ -528,7 +528,7 @@ data:
   APIResult result = appTest.getBalance("ETH");
 ```
 
-**Summary:** get wallet signle asset balance
+**Summary:** get wallet single asset balance
 
 #### HTTP Request 
 `GET /api/v1/app/balance/{coinName}` 
@@ -827,7 +827,7 @@ finalizedAt | number |  unix timestamp, seconds
 relatedOrderId | string | related order id
 
 
-### get wallet signle order
+### get wallet single order
 
 ```shell
 $ go run cmd/ctl/main.go "appkey" "appsecret" "GetOrder" "rNXBQGJlw09apVyg4nDo"
@@ -875,7 +875,7 @@ data:
   APIResult result = appTest.getOrder("rNXBQGJlw09apVyg4nDo");
 ```
 
-**Summary:** get wallet signle order
+**Summary:** get wallet single order
 
 #### HTTP Request 
 `GET /api/v1/app/order/{id}` 
