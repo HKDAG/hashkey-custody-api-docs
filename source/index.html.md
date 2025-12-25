@@ -281,41 +281,6 @@ Value | Type | Description
 address | string | the address to validate
 valid | boolean | the address is valid or not
 
-### anti-money laundering check
-
-```shell
-$ go run cmd/ctl/main.go "appkey" "appsecret" "CheckAddress" "ETH" "0x9bf65CDF5729b9588F6bAEBb2Aa2926472D4a035"
-code: 0
-message: success
-data:
-{
-  "hitRule": false
-}
-```
-
-```go
-	result, _ = app.CheckAddress("ETH", "0x9bf65CDF5729b9588F6bAEBb2Aa2926472D4a035")
-```
-
-**Summary:** anti-money laundering check
-
-#### HTTP Request 
-`POST /api/v1/address/{coinName}/check`
-
-**Parameters**
-
-| Name | Located in | Description | Required | Type |
-| ---- | ---------- | ----------- | -------- | ---- |
-| X-App-Key | header | app key | Yes | string |
-| coinName | path | coinName | Yes | string |
-| address | body | address | Yes | string |
-
-**Response Result**
-
-Value | Type | Description
---------- | ------- | ---------
-hitRule | boolean | the address hit the anti-money rule or not
-
 ## Wallet
 ### get all available assets 
 
