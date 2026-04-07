@@ -346,9 +346,6 @@
                           <li>
                             <a href="#verify-a-address" class="toc-h3 toc-link" data-title="verify a address">verify a address</a>
                           </li>
-                          <li>
-                            <a href="#anti-money-laundering-check" class="toc-h3 toc-link" data-title="anti-money laundering check">anti-money laundering check</a>
-                          </li>
                       </ul>
                   </li>
                   <li>
@@ -839,68 +836,6 @@ data:
 <td>the address is valid or not</td>
 </tr>
 </tbody></table>
-<h3 id='anti-money-laundering-check'>anti-money laundering check</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"CheckAddress"</span> <span class="s2">"ETH"</span> <span class="s2">"0x9bf65CDF5729b9588F6bAEBb2Aa2926472D4a035"</span>
-code: 0
-message: success
-data:
-<span class="o">{</span>
-  <span class="s2">"hitRule"</span>: <span class="nb">false</span>
-<span class="o">}</span>
-</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">CheckAddress</span><span class="p">(</span><span class="s">"ETH"</span><span class="p">,</span> <span class="s">"0x9bf65CDF5729b9588F6bAEBb2Aa2926472D4a035"</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Summary:</strong> anti-money laundering check</p>
-<h4 id='http-request-4'>HTTP Request</h4>
-<p><code>POST /api/v1/address/{coinName}/check</code></p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>X-App-Key</td>
-<td>header</td>
-<td>app key</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>coinName</td>
-<td>path</td>
-<td>coinName</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>address</td>
-<td>body</td>
-<td>address</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response Result</strong></p>
-
-<table><thead>
-<tr>
-<th>Value</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>hitRule</td>
-<td>boolean</td>
-<td>the address hit the anti-money rule or not</td>
-</tr>
-</tbody></table>
 <h2 id='wallet'>Wallet</h2><h3 id='get-all-available-assets'>get all available assets</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetAllAssets"</span>
 code: 0
 message: success
@@ -921,7 +856,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getAllAssets</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get all available assets</p>
-<h4 id='http-request-5'>HTTP Request</h4>
+<h4 id='http-request-4'>HTTP Request</h4>
 <p><code>GET /api/v1/app/allAssets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -995,7 +930,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getBalances</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get all asset balances, include the amount by USD and the price by USD</p>
-<h4 id='http-request-6'>HTTP Request</h4>
+<h4 id='http-request-5'>HTTP Request</h4>
 <p><code>GET /api/v1/app/balances</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1095,7 +1030,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">addAppAsset</span><span class="o">(</span><span class="s">"BTC"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> add wallet asset</p>
-<h4 id='http-request-7'>HTTP Request</h4>
+<h4 id='http-request-6'>HTTP Request</h4>
 <p><code>POST /api/v1/app/assets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1163,7 +1098,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getBalance</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet single asset balance</p>
-<h4 id='http-request-8'>HTTP Request</h4>
+<h4 id='http-request-7'>HTTP Request</h4>
 <p><code>GET /api/v1/app/balance/{coinName}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1278,7 +1213,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getAssets</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet assets</p>
-<h4 id='http-request-9'>HTTP Request</h4>
+<h4 id='http-request-8'>HTTP Request</h4>
 <p><code>GET /api/v1/app/assets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1357,7 +1292,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet assets detail</p>
-<h4 id='http-request-10'>HTTP Request</h4>
+<h4 id='http-request-9'>HTTP Request</h4>
 <p><code>GET /api/v1/app/assetsWithID</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -1511,7 +1446,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">GetAppInfo</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet attributes</p>
-<h4 id='http-request-11'>HTTP Request</h4>
+<h4 id='http-request-10'>HTTP Request</h4>
 <p><code>GET /api/v1/app/info</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1603,7 +1538,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getOrders</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet orders</p>
-<h4 id='http-request-12'>HTTP Request</h4>
+<h4 id='http-request-11'>HTTP Request</h4>
 <p><code>GET /api/v1/app/orders</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1823,7 +1758,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getOrder</span><span class="o">(</span><span class="s">"rNXBQGJlw09apVyg4nDo"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet single order</p>
-<h4 id='http-request-13'>HTTP Request</h4>
+<h4 id='http-request-12'>HTTP Request</h4>
 <p><code>GET /api/v1/app/order/{id}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1966,7 +1901,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">UpdateOrder</span><span class="p">(</span><span class="s">"rNXBQGJlw09apVyg4nDo"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Summary:</strong> update wallet order</p>
-<h4 id='http-request-14'>HTTP Request</h4>
+<h4 id='http-request-13'>HTTP Request</h4>
 <p><code>PUT /api/v1/app/order/{id}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2049,7 +1984,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="s">"ETH"</span><span class="o">,</span> <span class="s">"0xF0706B7Cab38EA42538f4D8C279B6F57ad1d4072"</span><span class="o">,</span> <span class="s">"0.05"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> withdraw</p>
-<h4 id='http-request-15'>HTTP Request</h4>
+<h4 id='http-request-14'>HTTP Request</h4>
 <p><code>POST /api/v1/app/{coinName}/withdraw</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2230,7 +2165,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Transfer</span><span class="p">(</span><span class="s">"e5dJyVp8R3B1m4o"</span><span class="p">,</span> <span class="s">"ETH"</span><span class="p">,</span> <span class="s">"0.01"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Summary:</strong> transfer</p>
-<h4 id='http-request-16'>HTTP Request</h4>
+<h4 id='http-request-15'>HTTP Request</h4>
 <p><code>POST /api/v1/app/{coinName}/transfer</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2381,7 +2316,7 @@ data:
 <h2 id='white-list'>White list</h2><h3 id='add-white-address'>add white address</h3><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">AddWhiteAddress</span><span class="p">(</span><span class="s">"ETH"</span><span class="p">,</span> <span class="s">"address"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>add withdraw/deposite white address</strong></p>
-<h4 id='http-request-17'>HTTP Request</h4>
+<h4 id='http-request-16'>HTTP Request</h4>
 <p><code>POST /api/v1/address/whitelist/add</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2448,7 +2383,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getMarket</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get the asset price by USD</p>
-<h4 id='http-request-18'>HTTP Request</h4>
+<h4 id='http-request-17'>HTTP Request</h4>
 <p><code>GET /api/v1/market/{coinName}</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2502,7 +2437,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get system current timestamp</p>
-<h4 id='http-request-19'>HTTP Request</h4>
+<h4 id='http-request-18'>HTTP Request</h4>
 <p><code>GET /api/v1/system/time</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2572,7 +2507,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">createWallet</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"password"</span><span class="o">,</span> <span class="s">"https://noti.domain/callback"</span><span class="o">,</span> <span class="s">"description"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> create a general wallet</p>
-<h4 id='http-request-20'>HTTP Request</h4>
+<h4 id='http-request-19'>HTTP Request</h4>
 <p><code>POST /api/v1/app</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2629,96 +2564,6 @@ data:
 <td>string</td>
 </tr>
 </tbody></table>
-<h4 id='password-rule'>Password rule:</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="p">(</span>
-    <span class="s">"crypto/rand"</span>
-    <span class="s">"fmt"</span>
-    <span class="s">"math/big"</span>
-<span class="p">)</span>
-
-<span class="k">const</span> <span class="p">(</span>
-    <span class="n">upper</span>   <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
-    <span class="n">lower</span>   <span class="o">=</span> <span class="s">"abcdefghijklmnopqrstuvwxyz"</span>
-    <span class="n">digits</span>  <span class="o">=</span> <span class="s">"0123456789"</span>
-    <span class="n">special</span> <span class="o">=</span> <span class="s">"~!@#$&amp;*()"</span>
-    <span class="n">all</span>     <span class="o">=</span> <span class="n">upper</span> <span class="o">+</span> <span class="n">lower</span> <span class="o">+</span> <span class="n">digits</span> <span class="o">+</span> <span class="n">special</span>
-<span class="p">)</span>
-
-<span class="c">// GeneratePassword 生成随机密码</span>
-<span class="k">func</span> <span class="n">GeneratePassword</span><span class="p">(</span><span class="n">length</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="m">8</span> <span class="o">||</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="m">30</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s">""</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"长度不满足要求"</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">for</span> <span class="p">{</span>
-        <span class="c">// 1. 确保每种类型至少有一个字符</span>
-        <span class="n">pwd</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
-        <span class="n">pwd</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">upper</span><span class="p">[</span><span class="n">randInt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">upper</span><span class="p">))]</span>
-        <span class="n">pwd</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lower</span><span class="p">[</span><span class="n">randInt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lower</span><span class="p">))]</span>
-        <span class="n">pwd</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[</span><span class="n">randInt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">))]</span>
-        <span class="n">pwd</span><span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">special</span><span class="p">[</span><span class="n">randInt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">special</span><span class="p">))]</span>
-
-        <span class="c">// 2. 填充剩余长度</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">4</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
-            <span class="n">pwd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">all</span><span class="p">[</span><span class="n">randInt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all</span><span class="p">))]</span>
-        <span class="p">}</span>
-
-        <span class="c">// 3. 打乱顺序</span>
-        <span class="n">shuffle</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span>
-
-        <span class="c">// 4. 检查是否含有连续字符</span>
-        <span class="k">if</span> <span class="o">!</span><span class="n">hasSequential</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">string</span><span class="p">(</span><span class="n">pwd</span><span class="p">),</span> <span class="no">nil</span>
-        <span class="p">}</span>
-        <span class="c">// 如果包含连续字符，则重新循环生成</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c">// randInt 生成安全的随机整数 [0, max)</span>
-<span class="k">func</span> <span class="n">randInt</span><span class="p">(</span><span class="n">max</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-    <span class="n">val</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">rand</span><span class="o">.</span><span class="n">Int</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">Reader</span><span class="p">,</span> <span class="n">big</span><span class="o">.</span><span class="n">NewInt</span><span class="p">(</span><span class="kt">int64</span><span class="p">(</span><span class="n">max</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="kt">int</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">Int64</span><span class="p">())</span>
-<span class="p">}</span>
-
-<span class="c">// shuffle 随机打乱字节切片</span>
-<span class="k">func</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">slice</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">slice</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span> <span class="p">{</span>
-        <span class="n">j</span> <span class="o">:=</span> <span class="n">randInt</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span>
-        <span class="n">slice</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">slice</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">slice</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">slice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c">// hasSequential 检查是否存在逻辑连续字符 (如 '123', 'abc', 'ABC')</span>
-<span class="k">func</span> <span class="n">hasSequential</span><span class="p">(</span><span class="n">s</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">s</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="o">!</span><span class="n">isAlphaNum</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="m">2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="m">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="m">1</span> <span class="o">&amp;&amp;</span> <span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="m">2</span><span class="p">]</span> <span class="o">==</span> <span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="m">2</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="no">true</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="no">false</span>
-<span class="p">}</span>
-
-<span class="k">func</span> <span class="n">isAlphaNum</span><span class="p">(</span><span class="n">b</span> <span class="kt">byte</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="sc">'a'</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="sc">'z'</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="sc">'A'</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="sc">'Z'</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c">// 示例：生成 16 位密码</span>
-    <span class="n">password</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">GeneratePassword</span><span class="p">(</span><span class="m">16</span><span class="p">)</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"生成的密码:"</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-<span class="p">}</span>
-
-</code></pre></div>
-<ol>
-<li><p>Password must contain at least 3 of the following 4 character types: uppercase letters (A-Z), lowercase letters (a-z), numbers (0-9), and special characters (~!@#$&amp;*()).</p></li>
-<li><p>Password must not contain consecutive characters; for example, characters like 123 or abc will not conform to the rules.</p></li>
-<li><p>Password length must be between 8 and 30 characters.</p></li>
-</ol>
 
 <p><strong>Response Result</strong></p>
 
@@ -2745,58 +2590,6 @@ data:
 <td>the base64 encoded <a href="#aes-encryption">AES encrypted</a> appsecret, the appsecret used for the <a href="#signature">signature</a> of <a href="#wallet-api">Wallet API</a></td>
 </tr>
 </tbody></table>
-
-<p><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br></p>
 <h3 id='get-appkeys'>get appkeys</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"teamkey"</span> <span class="s2">"teamsecret"</span> <span class="s2">"GetWalletKeys"</span> <span class="s2">"appID"</span>
 code: 0
 message: success
@@ -2815,7 +2608,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">getWalletKeys</span><span class="o">(</span><span class="s">"appID"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get appkeys(include appsecret)</p>
-<h4 id='http-request-21'>HTTP Request</h4>
+<h4 id='http-request-20'>HTTP Request</h4>
 <p><code>GET /api/v1/app/{appID}/keys</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2902,7 +2695,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">updateWalletKey</span><span class="o">(</span><span class="s">"appKey"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> update appkey attributes</p>
-<h4 id='http-request-22'>HTTP Request</h4>
+<h4 id='http-request-21'>HTTP Request</h4>
 <p><code>PUT /api/v1/appKey/{appKey}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2986,7 +2779,7 @@ data:
         <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
     <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
     <span class="p">})</span>
-</code></pre></div><h4 id='http-request-23'>HTTP Request</h4>
+</code></pre></div><h4 id='http-request-22'>HTTP Request</h4>
 <p><code>GET /api/v1/finance/orders</code> </p>
 
 <blockquote>
