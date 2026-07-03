@@ -752,6 +752,7 @@ value | string | 交易值
 note | string | 订单备注
 message | string | 转账消息
 relatedOrderId | string | 关联订单ID
+amlViolation | boolean | aml检查不通过
 
 ### 获取钱包单笔订单
 
@@ -831,6 +832,7 @@ value | string | 交易值
 note | string | 订单备注
 message | string | 转账消息
 relatedOrderId | string | 关联订单ID
+amlViolation | boolean | aml检查不通过
 
 ### 更新钱包订单
 
@@ -1880,7 +1882,8 @@ data:
   "affirmativeConfirmation": 20,
   "confirmations": 27,
   "sign": "796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0",
-  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo"
+  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo",
+  "amlViolation": false
 }
 ```
 
@@ -1906,6 +1909,7 @@ memo | string | 订单备注
 n | number | 订单索引
 sign | string | 签名
 relatedOrderID | string | 关联订单ID
+amlViolation | boolean | aml检查不通过
 
 ### 签名
 上面的 sign 参数可以通过下面的方法验证，以保证这个回调结果的发送方身份:

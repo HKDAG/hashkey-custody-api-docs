@@ -790,6 +790,7 @@ message | string | message to recipient of transfer
 createdAt | number |  unix timestamp, seconds
 finalizedAt | number |  unix timestamp, seconds
 relatedOrderId | string | related order id
+amlViolation | boolean | violate aml
 
 
 ### get wallet single order
@@ -875,6 +876,7 @@ message | string | message to recipient of transfer
 createdAt | number |  unix timestamp, seconds
 finalizedAt | number |  unix timestamp, seconds
 relatedOrderId | string | related order id
+amlViolation | boolean | violate aml
 ### update wallet order
 
 ```shell
@@ -1626,7 +1628,8 @@ Status Code **200**
   "affirmativeConfirmation": 20,
   "confirmations": 27,
   "sign": "fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3",
-  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo"
+  "relatedOrderID": "orderrNXBQGJlw09apVyg4nDo",
+  "amlViolation": false
 }
 ```
 
