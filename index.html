@@ -1721,6 +1721,11 @@ data:
 <td>string</td>
 <td>related order id</td>
 </tr>
+<tr>
+<td>amlViolation</td>
+<td>boolean</td>
+<td>violate aml</td>
+</tr>
 </tbody></table>
 <h3 id='get-wallet-single-order'>get wallet single order</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span>
 code: 0
@@ -1891,6 +1896,11 @@ data:
 <td>relatedOrderId</td>
 <td>string</td>
 <td>related order id</td>
+</tr>
+<tr>
+<td>amlViolation</td>
+<td>boolean</td>
+<td>violate aml</td>
 </tr>
 </tbody></table>
 <h3 id='update-wallet-order'>update wallet order</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"UpdateOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span> <span class="s2">"123"</span>
@@ -3482,7 +3492,8 @@ data:
   </span><span class="nl">"affirmativeConfirmation"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="nl">"confirmations"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb0f53f33bba4cfa4bcb2c81e976bbe817633ba87a9904b6c3de293da3805cb3"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="w">
+  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amlViolation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>Callbck Result</strong></p>

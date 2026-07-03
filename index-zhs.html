@@ -1668,6 +1668,11 @@ data:
 <td>string</td>
 <td>关联订单ID</td>
 </tr>
+<tr>
+<td>amlViolation</td>
+<td>boolean</td>
+<td>aml检查不通过</td>
+</tr>
 </tbody></table>
 <h3 id='402f86af78'>获取钱包单笔订单</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span>
 code: 0
@@ -1825,6 +1830,11 @@ data:
 <td>relatedOrderId</td>
 <td>string</td>
 <td>关联订单ID</td>
+</tr>
+<tr>
+<td>amlViolation</td>
+<td>boolean</td>
+<td>aml检查不通过</td>
 </tr>
 </tbody></table>
 <h3 id='07bb09a568'>更新钱包订单</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"UpdateOrder"</span> <span class="s2">"rNXBQGJlw09apVyg4nDo"</span> <span class="s2">"123"</span>
@@ -3852,7 +3862,8 @@ data:
   </span><span class="nl">"affirmativeConfirmation"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="nl">"confirmations"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"796dde931a15c98edc3dfdb65a2c2addfde422f217a1f6934be9226542839aa0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="w">
+  </span><span class="nl">"relatedOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderrNXBQGJlw09apVyg4nDo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amlViolation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>回调结果</strong></p>
@@ -3953,6 +3964,11 @@ data:
 <td>relatedOrderID</td>
 <td>string</td>
 <td>关联订单ID</td>
+</tr>
+<tr>
+<td>amlViolation</td>
+<td>boolean</td>
+<td>aml检查不通过</td>
 </tr>
 </tbody></table>
 <h3 id='8ba46c43fe'>签名</h3>
