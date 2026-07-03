@@ -684,7 +684,8 @@ data:
     "to": "0xF0706B7Cab38EA42538f4D8C279B6F57ad1d4072",
     "txid": "0xcfc4cb925c77c2ea10be3c233029fc1f05d0ddffe7396920ddd493544e52933d",
     "type": "ETH",
-    "value": "0.045000000000000000"
+    "value": "0.045000000000000000",
+    "amlViolation": false
   }]
 }
 ```
@@ -777,7 +778,11 @@ data:
   "type": "ETH",
   "value": "0.045000000000000000",
   "note": "note",
-  "message": ""
+  "message": "",
+  "createdAt": 1569306519,
+  "finalizedAt": 1569306519,
+  "relatedOrderId": "orderrNXBQGJlw09apVyg4nDo",
+  "amlViolation": false
 }
 ```
 
