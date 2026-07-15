@@ -346,6 +346,9 @@
                           <li>
                             <a href="#verify-a-address" class="toc-h3 toc-link" data-title="verify a address">verify a address</a>
                           </li>
+                          <li>
+                            <a href="#get-all-deposit-addresses" class="toc-h3 toc-link" data-title="get all deposit addresses">get all deposit addresses</a>
+                          </li>
                       </ul>
                   </li>
                   <li>
@@ -836,6 +839,82 @@ data:
 <td>the address is valid or not</td>
 </tr>
 </tbody></table>
+<h3 id='get-all-deposit-addresses'>get all deposit addresses</h3>
+<p><strong>Summary:</strong> get all deposit addresses for a coin, paginated by cursor (afterID), sorted by id DESC</p>
+<h4 id='http-request-4'>HTTP Request</h4>
+<p><code>GET /api/v1/address/{coinName}/all</code></p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-App-Key</td>
+<td>header</td>
+<td>app key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>coinName</td>
+<td>path</td>
+<td>coin name</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>afterID</td>
+<td>query</td>
+<td>cursor: return records with id &lt; afterID (for next page, pass the smallest id from the previous response)</td>
+<td>No</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>query</td>
+<td>page size, 1–100, default 20</td>
+<td>No</td>
+<td>integer</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Result</strong></p>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>addresses</td>
+<td>array</td>
+<td>list of address items</td>
+</tr>
+<tr>
+<td>addresses[].id</td>
+<td>integer</td>
+<td>internal address id (use as afterID for next page)</td>
+</tr>
+<tr>
+<td>addresses[].address</td>
+<td>string</td>
+<td>deposit address</td>
+</tr>
+<tr>
+<td>addresses[].type</td>
+<td>string</td>
+<td>address type</td>
+</tr>
+</tbody></table>
 <h2 id='wallet'>Wallet</h2><h3 id='get-all-available-assets'>get all available assets</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"appkey"</span> <span class="s2">"appsecret"</span> <span class="s2">"GetAllAssets"</span>
 code: 0
 message: success
@@ -856,7 +935,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getAllAssets</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get all available assets</p>
-<h4 id='http-request-4'>HTTP Request</h4>
+<h4 id='http-request-5'>HTTP Request</h4>
 <p><code>GET /api/v1/app/allAssets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -930,7 +1009,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getBalances</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get all asset balances, include the amount by USD and the price by USD</p>
-<h4 id='http-request-5'>HTTP Request</h4>
+<h4 id='http-request-6'>HTTP Request</h4>
 <p><code>GET /api/v1/app/balances</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1030,7 +1109,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">addAppAsset</span><span class="o">(</span><span class="s">"BTC"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> add wallet asset</p>
-<h4 id='http-request-6'>HTTP Request</h4>
+<h4 id='http-request-7'>HTTP Request</h4>
 <p><code>POST /api/v1/app/assets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1098,7 +1177,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getBalance</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet single asset balance</p>
-<h4 id='http-request-7'>HTTP Request</h4>
+<h4 id='http-request-8'>HTTP Request</h4>
 <p><code>GET /api/v1/app/balance/{coinName}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1213,7 +1292,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getAssets</span><span class="o">();</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet assets</p>
-<h4 id='http-request-8'>HTTP Request</h4>
+<h4 id='http-request-9'>HTTP Request</h4>
 <p><code>GET /api/v1/app/assets</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1292,7 +1371,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet assets detail</p>
-<h4 id='http-request-9'>HTTP Request</h4>
+<h4 id='http-request-10'>HTTP Request</h4>
 <p><code>GET /api/v1/app/assetsWithID</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -1446,7 +1525,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">GetAppInfo</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet attributes</p>
-<h4 id='http-request-10'>HTTP Request</h4>
+<h4 id='http-request-11'>HTTP Request</h4>
 <p><code>GET /api/v1/app/info</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1539,7 +1618,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getOrders</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet orders</p>
-<h4 id='http-request-11'>HTTP Request</h4>
+<h4 id='http-request-12'>HTTP Request</h4>
 <p><code>GET /api/v1/app/orders</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1592,6 +1671,13 @@ data:
 <td>bizType</td>
 <td>query</td>
 <td>order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT</td>
+<td>No</td>
+<td>string</td>
+</tr>
+<tr>
+<td>txHash</td>
+<td>query</td>
+<td>filter by transaction hash (exact match)</td>
 <td>No</td>
 <td>string</td>
 </tr>
@@ -1765,7 +1851,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getOrder</span><span class="o">(</span><span class="s">"rNXBQGJlw09apVyg4nDo"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get wallet single order</p>
-<h4 id='http-request-12'>HTTP Request</h4>
+<h4 id='http-request-13'>HTTP Request</h4>
 <p><code>GET /api/v1/app/order/{id}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1913,7 +1999,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">UpdateOrder</span><span class="p">(</span><span class="s">"rNXBQGJlw09apVyg4nDo"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Summary:</strong> update wallet order</p>
-<h4 id='http-request-13'>HTTP Request</h4>
+<h4 id='http-request-14'>HTTP Request</h4>
 <p><code>PUT /api/v1/app/order/{id}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -1996,7 +2082,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="s">"ETH"</span><span class="o">,</span> <span class="s">"0xF0706B7Cab38EA42538f4D8C279B6F57ad1d4072"</span><span class="o">,</span> <span class="s">"0.05"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> withdraw</p>
-<h4 id='http-request-14'>HTTP Request</h4>
+<h4 id='http-request-15'>HTTP Request</h4>
 <p><code>POST /api/v1/app/{coinName}/withdraw</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2177,7 +2263,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Transfer</span><span class="p">(</span><span class="s">"e5dJyVp8R3B1m4o"</span><span class="p">,</span> <span class="s">"ETH"</span><span class="p">,</span> <span class="s">"0.01"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Summary:</strong> transfer</p>
-<h4 id='http-request-15'>HTTP Request</h4>
+<h4 id='http-request-16'>HTTP Request</h4>
 <p><code>POST /api/v1/app/{coinName}/transfer</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2328,7 +2414,7 @@ data:
 <h2 id='white-list'>White list</h2><h3 id='add-white-address'>add white address</h3><div class="highlight"><pre class="highlight go tab-go"><code>    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">AddWhiteAddress</span><span class="p">(</span><span class="s">"ETH"</span><span class="p">,</span> <span class="s">"address"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>add withdraw/deposite white address</strong></p>
-<h4 id='http-request-16'>HTTP Request</h4>
+<h4 id='http-request-17'>HTTP Request</h4>
 <p><code>POST /api/v1/address/whitelist/add</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2395,7 +2481,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">appTest</span><span class="o">.</span><span class="na">getMarket</span><span class="o">(</span><span class="s">"ETH"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get the asset price by USD</p>
-<h4 id='http-request-17'>HTTP Request</h4>
+<h4 id='http-request-18'>HTTP Request</h4>
 <p><code>GET /api/v1/market/{coinName}</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2449,7 +2535,7 @@ data:
 <span class="o">}</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get system current timestamp</p>
-<h4 id='http-request-18'>HTTP Request</h4>
+<h4 id='http-request-19'>HTTP Request</h4>
 <p><code>GET /api/v1/system/time</code></p>
 
 <p><strong>Parameters</strong></p>
@@ -2519,7 +2605,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">createWallet</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"password"</span><span class="o">,</span> <span class="s">"https://noti.domain/callback"</span><span class="o">,</span> <span class="s">"description"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> create a general wallet</p>
-<h4 id='http-request-19'>HTTP Request</h4>
+<h4 id='http-request-20'>HTTP Request</h4>
 <p><code>POST /api/v1/app</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2620,7 +2706,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">getWalletKeys</span><span class="o">(</span><span class="s">"appID"</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> get appkeys(include appsecret)</p>
-<h4 id='http-request-20'>HTTP Request</h4>
+<h4 id='http-request-21'>HTTP Request</h4>
 <p><code>GET /api/v1/app/{appID}/keys</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2707,7 +2793,7 @@ data:
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>  <span class="nc">APIResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">companyTest</span><span class="o">.</span><span class="na">updateWalletKey</span><span class="o">(</span><span class="s">"appKey"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 <p><strong>Summary:</strong> update appkey attributes</p>
-<h4 id='http-request-21'>HTTP Request</h4>
+<h4 id='http-request-22'>HTTP Request</h4>
 <p><code>PUT /api/v1/appKey/{appKey}</code> </p>
 
 <p><strong>Parameters</strong></p>
@@ -2791,7 +2877,7 @@ data:
         <span class="s">"page"</span><span class="o">:</span><span class="m">1</span><span class="p">,</span>
     <span class="s">"pageSize"</span><span class="o">:</span><span class="m">10</span>
     <span class="p">})</span>
-</code></pre></div><h4 id='http-request-22'>HTTP Request</h4>
+</code></pre></div><h4 id='http-request-23'>HTTP Request</h4>
 <p><code>GET /api/v1/finance/orders</code> </p>
 
 <blockquote>
