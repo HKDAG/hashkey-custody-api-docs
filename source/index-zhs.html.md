@@ -281,6 +281,31 @@ data:
 address | string | the address to validate
 valid | boolean | the address is valid or not
 
+### 获取所有充值地址
+
+**总结:** 获取某币种的所有充值地址，按 id 降序排列，支持游标分页（afterID）
+
+#### HTTP请求
+`GET /api/v1/address/{coinName}/all`
+
+**参数**
+
+| 名称 | 位置 | 描述 | 是否必需 | 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | path | 币种名称 | Yes | string |
+| afterID | query | 游标：返回 id < afterID 的记录（翻页时传上一页结果中最小的 id） | No | integer |
+| amount | query | 分页数量，1–100，默认 20 | No | integer |
+
+**响应结果**
+
+值 | 类型 | 描述
+--------- | ------- | ---------
+addresses | array | 地址列表
+addresses[].id | integer | 地址内部 id（翻页时作为 afterID 使用）
+addresses[].address | string | 充值地址
+addresses[].type | string | 地址类型
+
 ## 钱包
 ### 获取所有可用资产
 
@@ -723,6 +748,7 @@ data:
 | coins | query | coin list, can be empty string | No | string |
 | state | query | order state, can be empty string | No | string |
 | bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT | No | string |
+| txHash | query | 按交易哈希过滤（精确匹配） | No | string |
 
 **响应结果**
 

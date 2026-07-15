@@ -281,6 +281,31 @@ Value | Type | Description
 address | string | the address to validate
 valid | boolean | the address is valid or not
 
+### get all deposit addresses
+
+**Summary:** get all deposit addresses for a coin, paginated by cursor (afterID), sorted by id DESC
+
+#### HTTP Request
+`GET /api/v1/address/{coinName}/all`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-App-Key | header | app key | Yes | string |
+| coinName | path | coin name | Yes | string |
+| afterID | query | cursor: return records with id < afterID (for next page, pass the smallest id from the previous response) | No | integer |
+| amount | query | page size, 1–100, default 20 | No | integer |
+
+**Response Result**
+
+Value | Type | Description
+--------- | ------- | ---------
+addresses | array | list of address items
+addresses[].id | integer | internal address id (use as afterID for next page)
+addresses[].address | string | deposit address
+addresses[].type | string | address type
+
 ## Wallet
 ### get all available assets 
 
@@ -760,6 +785,7 @@ data:
 | coins | query | coin list, can be empty string | No | string |
 | state | query | order state, can be empty string | No | string |
 | bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT | No | string |
+| txHash | query | filter by transaction hash (exact match) | No | string |
 
 **Response Result**
 
