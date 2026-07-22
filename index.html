@@ -446,6 +446,14 @@
                           </li>
                       </ul>
                   </li>
+                  <li>
+                    <a href="#funding" class="toc-h2 toc-link" data-title="Funding">Funding</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#get-funding-balances" class="toc-h3 toc-link" data-title="get funding balances">get funding balances</a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </li>
           <li>
@@ -3556,6 +3564,193 @@ data:
 <td>true</td>
 <td>none</td>
 <td>Total</td>
+</tr>
+</tbody></table>
+<h2 id='funding'>Funding</h2><h3 id='get-funding-balances'>get funding balances</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFundingWallets"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"wallets"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"walletylr07eg5r4j2mkpw"</span>,
+      <span class="s2">"name"</span>: <span class="s2">"wallet2"</span>,
+      <span class="s2">"adminWalletSwitch"</span>: <span class="nb">true</span>,
+      <span class="s2">"isFrozen"</span>: <span class="nb">false</span>,
+      <span class="s2">"balances"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"BTC"</span>,
+          <span class="s2">"balance"</span>: <span class="s2">"10001.225000000000000000"</span>,
+          <span class="s2">"assetSwitch"</span>: <span class="nb">true</span>,
+          <span class="s2">"money"</span>: 98175466.911631525
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"ETH"</span>,
+          <span class="s2">"balance"</span>: <span class="s2">"1.000000000000000000"</span>,
+          <span class="s2">"assetSwitch"</span>: <span class="nb">true</span>,
+          <span class="s2">"money"</span>: 246.565827
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getFundingWallets</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><strong>Summary:</strong> get the funding balances of all wallets under the team, including the value converted to USD</p>
+<h4 id='http-request-24'>HTTP Request</h4>
+<p><code>GET /api/v1/funding/balances</code> </p>
+
+<p><strong>Params</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Result</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"wallets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletylr07eg5r4j2mkpw"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wallet2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"adminWalletSwitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isFrozen"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10001.225000000000000000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"assetSwitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"money"</span><span class="p">:</span><span class="w"> </span><span class="mf">98175466.911631525</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» wallets</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>Funding wallet list</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet id</td>
+</tr>
+<tr>
+<td>»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Wallet name</td>
+</tr>
+<tr>
+<td>»»» adminWalletSwitch</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>Whether admin wallet transfer is enabled for this wallet</td>
+</tr>
+<tr>
+<td>»»» isFrozen</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>Whether the wallet is frozen</td>
+</tr>
+<tr>
+<td>»»» balances</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>Balance list of the wallet</td>
+</tr>
+<tr>
+<td>»»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Coin name</td>
+</tr>
+<tr>
+<td>»»»» balance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Coin balance</td>
+</tr>
+<tr>
+<td>»»»» assetSwitch</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>Whether the coin is enabled in this wallet</td>
+</tr>
+<tr>
+<td>»»»» money</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>The value (USD) equal to the balance</td>
 </tr>
 </tbody></table>
 <h1 id='callback'>Callback</h1><h2 id='order'>Order</h2>

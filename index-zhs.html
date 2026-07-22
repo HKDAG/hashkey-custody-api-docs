@@ -463,6 +463,14 @@
                           </li>
                       </ul>
                   </li>
+                  <li>
+                    <a href="#bf524917c8" class="toc-h2 toc-link" data-title="资金">资金</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#a96104249f" class="toc-h3 toc-link" data-title="获取资金余额">获取资金余额</a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </li>
           <li>
@@ -3929,6 +3937,193 @@ data:
 <td>true</td>
 <td>none</td>
 <td>总数量</td>
+</tr>
+</tbody></table>
+<h2 id='bf524917c8'>资金</h2><h3 id='a96104249f'>获取资金余额</h3><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span>go run cmd/ctl/main.go <span class="s2">"companykey"</span> <span class="s2">"companysecret"</span> <span class="s2">"GetFundingWallets"</span>
+code: 0
+message: success
+data:
+<span class="o">{</span>
+  <span class="s2">"wallets"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"walletylr07eg5r4j2mkpw"</span>,
+      <span class="s2">"name"</span>: <span class="s2">"wallet2"</span>,
+      <span class="s2">"adminWalletSwitch"</span>: <span class="nb">true</span>,
+      <span class="s2">"isFrozen"</span>: <span class="nb">false</span>,
+      <span class="s2">"balances"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"BTC"</span>,
+          <span class="s2">"balance"</span>: <span class="s2">"10001.225000000000000000"</span>,
+          <span class="s2">"assetSwitch"</span>: <span class="nb">true</span>,
+          <span class="s2">"money"</span>: 98175466.911631525
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"ETH"</span>,
+          <span class="s2">"balance"</span>: <span class="s2">"1.000000000000000000"</span>,
+          <span class="s2">"assetSwitch"</span>: <span class="nb">true</span>,
+          <span class="s2">"money"</span>: 246.565827
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getFundingWallets</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><strong>摘要:</strong> 获取团队下所有钱包的资金余额，包含换算成USD的价值</p>
+<h4 id='http-28'>HTTP请求</h4>
+<p><code>GET /api/v1/funding/balances</code> </p>
+
+<p><strong>参数</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>描述</th>
+<th>是否必需</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Company-Key</td>
+<td>header</td>
+<td>company key</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应结果</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"wallets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"walletylr07eg5r4j2mkpw"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wallet2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"adminWalletSwitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isFrozen"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10001.225000000000000000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"assetSwitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"money"</span><span class="p">:</span><span class="w"> </span><span class="mf">98175466.911631525</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>状态码 <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» wallets</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>资金钱包列表</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包id</td>
+</tr>
+<tr>
+<td>»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>钱包名称</td>
+</tr>
+<tr>
+<td>»»» adminWalletSwitch</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>该钱包是否开启管理员钱包划转</td>
+</tr>
+<tr>
+<td>»»» isFrozen</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>钱包是否被冻结</td>
+</tr>
+<tr>
+<td>»»» balances</td>
+<td>[object]</td>
+<td>true</td>
+<td>none</td>
+<td>钱包的余额列表</td>
+</tr>
+<tr>
+<td>»»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>币种</td>
+</tr>
+<tr>
+<td>»»»» balance</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>币种余额</td>
+</tr>
+<tr>
+<td>»»»» assetSwitch</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>该币种在此钱包是否开启</td>
+</tr>
+<tr>
+<td>»»»» money</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>余额对应的价值（USD）</td>
 </tr>
 </tbody></table>
 <h1 id='c76b97433d'>回调</h1><h2 id='81b3798beb'>订单</h2>
