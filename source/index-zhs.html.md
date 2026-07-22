@@ -1889,6 +1889,106 @@ data:
 |»»» withdrawCount|integer|true|none|提币次数|
 |»» total|integer|true|none|总数量|
 
+## 资金
+### 获取资金余额
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFundingWallets"
+code: 0
+message: success
+data:
+{
+  "wallets": [
+    {
+      "id": "walletylr07eg5r4j2mkpw",
+      "name": "wallet2",
+      "adminWalletSwitch": true,
+      "isFrozen": false,
+      "balances": [
+        {
+          "name": "BTC",
+          "balance": "10001.225000000000000000",
+          "assetSwitch": true,
+          "money": 98175466.911631525
+        },
+        {
+          "name": "ETH",
+          "balance": "1.000000000000000000",
+          "assetSwitch": true,
+          "money": 246.565827
+        }
+      ]
+    }
+  ]
+}
+```
+
+```javascript
+    try {
+        result = await api.getFundingWallets()
+        console.log(result)
+    } catch(e) {
+        // do something
+        console.log(e)
+    }
+```
+
+**摘要:** 获取团队下所有钱包的资金余额，包含换算成USD的价值
+
+#### HTTP请求 
+`GET /api/v1/funding/balances` 
+
+**参数**
+
+| 名称 | 位置 | 描述| 是否必需| 类型 |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+
+**响应结果**
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "wallets": [
+      {
+        "id": "walletylr07eg5r4j2mkpw",
+        "name": "wallet2",
+        "adminWalletSwitch": true,
+        "isFrozen": false,
+        "balances": [
+          {
+            "name": "BTC",
+            "balance": "10001.225000000000000000",
+            "assetSwitch": true,
+            "money": 98175466.911631525
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+状态码 **200**
+
+|名称|类型|必选|约束|说明|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» wallets|[object]|true|none|资金钱包列表|
+|»»» id|string|true|none|钱包id|
+|»»» name|string|true|none|钱包名称|
+|»»» adminWalletSwitch|boolean|true|none|该钱包是否开启管理员钱包划转|
+|»»» isFrozen|boolean|true|none|钱包是否被冻结|
+|»»» balances|[object]|true|none|钱包的余额列表|
+|»»»» name|string|true|none|币种|
+|»»»» balance|string|true|none|币种余额|
+|»»»» assetSwitch|boolean|true|none|该币种在此钱包是否开启|
+|»»»» money|number|true|none|余额对应的价值（USD）|
+
 # 回调
 
 ## 订单

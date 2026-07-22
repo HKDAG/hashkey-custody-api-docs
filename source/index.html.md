@@ -1632,6 +1632,106 @@ Status Code **200**
 |»»» withdrawCount|integer|true|none|Withdraw count|
 |»» total|integer|true|none|Total|
 
+## Funding
+### get funding balances
+
+```shell
+$ go run cmd/ctl/main.go "companykey" "companysecret" "GetFundingWallets"
+code: 0
+message: success
+data:
+{
+  "wallets": [
+    {
+      "id": "walletylr07eg5r4j2mkpw",
+      "name": "wallet2",
+      "adminWalletSwitch": true,
+      "isFrozen": false,
+      "balances": [
+        {
+          "name": "BTC",
+          "balance": "10001.225000000000000000",
+          "assetSwitch": true,
+          "money": 98175466.911631525
+        },
+        {
+          "name": "ETH",
+          "balance": "1.000000000000000000",
+          "assetSwitch": true,
+          "money": 246.565827
+        }
+      ]
+    }
+  ]
+}
+```
+
+```javascript
+    try {
+        result = await api.getFundingWallets()
+        console.log(result)
+    } catch(e) {
+        // do something
+        console.log(e)
+    }
+```
+
+**Summary:** get the funding balances of all wallets under the team, including the value converted to USD
+
+#### HTTP Request 
+`GET /api/v1/funding/balances` 
+
+**Params**
+
+| Name | Located in | Description| Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| X-Company-Key | header | company key | Yes | string |
+
+**Response Result**
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "wallets": [
+      {
+        "id": "walletylr07eg5r4j2mkpw",
+        "name": "wallet2",
+        "adminWalletSwitch": true,
+        "isFrozen": false,
+        "balances": [
+          {
+            "name": "BTC",
+            "balance": "10001.225000000000000000",
+            "assetSwitch": true,
+            "money": 98175466.911631525
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Status Code **200**
+
+|Name|Type|Required|Constraints|Description|
+|---|---|---|---|---|
+|» code|integer|true|none|none|
+|» message|string|true|none|none|
+|» data|object|true|none|none|
+|»» wallets|[object]|true|none|Funding wallet list|
+|»»» id|string|true|none|Wallet id|
+|»»» name|string|true|none|Wallet name|
+|»»» adminWalletSwitch|boolean|true|none|Whether admin wallet transfer is enabled for this wallet|
+|»»» isFrozen|boolean|true|none|Whether the wallet is frozen|
+|»»» balances|[object]|true|none|Balance list of the wallet|
+|»»»» name|string|true|none|Coin name|
+|»»»» balance|string|true|none|Coin balance|
+|»»»» assetSwitch|boolean|true|none|Whether the coin is enabled in this wallet|
+|»»»» money|number|true|none|The value (USD) equal to the balance|
+
 # Callback
 
 ## Order
