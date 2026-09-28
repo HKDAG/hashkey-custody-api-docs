@@ -1635,7 +1635,7 @@ data:
 <tr>
 <td>bizType</td>
 <td>query</td>
-<td>order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT</td>
+<td>order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT/SWEEP_FEE_DEDUCT/WITHDRAW_FEE_DEDUCT</td>
 <td>No</td>
 <td>string</td>
 </tr>
@@ -3294,7 +3294,7 @@ data:
 <tr>
 <td>bizTypes</td>
 <td>query</td>
-<td>类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER</td>
+<td>类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER<br>归集手续费扣减-SWEEP_FEE_DEDUCT<br>提币手续费扣减-WITHDRAW_FEE_DEDUCT</td>
 <td>否</td>
 <td>string</td>
 </tr>
@@ -3449,7 +3449,7 @@ data:
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转</td>
+<td>类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转<br>归集手续费扣减-SWEEP_FEE_DEDUCT<br>提币手续费扣减-WITHDRAW_FEE_DEDUCT</td>
 </tr>
 <tr>
 <td>»»» coinName</td>
