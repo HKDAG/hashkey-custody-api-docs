@@ -747,7 +747,7 @@ data:
 | amount | query | item count on this page, e.g. 10 | Yes | string |
 | coins | query | coin list, can be empty string | No | string |
 | state | query | order state, can be empty string | No | string |
-| bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT | No | string |
+| bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT/SWEEP_FEE_DEDUCT/WITHDRAW_FEE_DEDUCT | No | string |
 | txHash | query | 按交易哈希过滤（精确匹配） | No | string |
 
 **响应结果**
@@ -1671,7 +1671,7 @@ data:
 | ---- | ---------- | ----------- | -------- | ---- |
 | X-Company-Key | header | company key | Yes | string |
 |wallets|query|钱包id列表,多个值使用逗号分割| 否 |string|
-|bizTypes|query|类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER| 否 |string|
+|bizTypes|query|类型:<br>充值-DEPOSIT<br>提币-WITHDRAW<br>批量提币-BATCH_WITHDRAW<br>批量划转-BATCH_TRANSFER<br>划转-WALLET_TRANSFER<br>归集手续费扣减-SWEEP_FEE_DEDUCT<br>提币手续费扣减-WITHDRAW_FEE_DEDUCT| 否 |string|
 |subType|query|子类型：<br>入账-IN<br>出账-OUT| 否 |string|
 |coins|query|token列表（多个使用逗号分隔）| 否 |string|
 |start|query|开始时间戳（秒）| 是 |number|
@@ -1729,7 +1729,7 @@ data:
 |»»» fee|string|true|none|手续费|
 |»»» balance|string|true|none|余额|
 |»»» bizOrderID|string|true|none|业务订单id|
-|»»» bizType|string|true|none|类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转|
+|»»» bizType|string|true|none|类型：<br>DEPOSIT-充值<br>WITHDRAW-提币<br>BATCH_WITHDRAW-批量提币<br>BATCH_TRANSFER-批量划转<br>WALLET_TRANSFER-划转<br>归集手续费扣减-SWEEP_FEE_DEDUCT<br>提币手续费扣减-WITHDRAW_FEE_DEDUCT|
 |»»» coinName|string|true|none|币种|
 |»»» createdAt|integer|true|none|创建时间|
 |»»» exchangeID|string|true|none|交易所id|

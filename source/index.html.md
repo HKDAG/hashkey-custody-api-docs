@@ -784,7 +784,7 @@ data:
 | amount | query | item count on this page, e.g. 10 | Yes | string |
 | coins | query | coin list, can be empty string | No | string |
 | state | query | order state, can be empty string | No | string |
-| bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT | No | string |
+| bizType | query | order type, TRANSFER_IN/TRANSFER_OUT/WITHDRAW/DEPOSIT/SWEEP_FEE_DEDUCT/WITHDRAW_FEE_DEDUCT | No | string |
 | txHash | query | filter by transaction hash (exact match) | No | string |
 
 **Response Result**
@@ -1412,7 +1412,7 @@ data:
 | ---- | ---------- | ----------- | -------- | ---- |
 | X-Company-Key | header | company key | Yes | string |
 |wallets|query|wallet id list, multiple values separated by commas|No|string|
-|bizTypes|query|Type:<br>DEPOSIT<br>WITHDRAW<br>BATCH_WITHDRAW<br>BATCH_TRANSFER<br>WALLET_TRANSFER|No|string|
+|bizTypes|query|Type:<br>DEPOSIT<br>WITHDRAW<br>BATCH_WITHDRAW<br>BATCH_TRANSFER<br>WALLET_TRANSFER<br>SWEEP_FEE_DEDUCT<br>WITHDRAW_FEE_DEDUCT|No|string|
 |subType|query|Subtype:<br>IN<br>OUT|No|string|
 |coins|query|token list (multiple values separated by commas)|No|string|
 |start|query|Start timestamp (seconds)|Yes|number|
@@ -1471,7 +1471,7 @@ Status Code **200**
 |»»» fee|string|true|none|Fee|
 |»»» balance|string|true|none|Balance|
 |»»» bizOrderID|string|true|none|Business order id|
-|»»» bizType|string|true|none|Type:<br>DEPOSIT-Deposit<br>WITHDRAW-Withdraw<br>BATCH_WITHDRAW-Batch withdraw<br>BATCH_TRANSFER-Batch transfer<br>WALLET_TRANSFER-Wallet transfer|
+|»»» bizType|string|true|none|Type:<br>DEPOSIT-Deposit<br>WITHDRAW-Withdraw<br>BATCH_WITHDRAW-Batch withdraw<br>BATCH_TRANSFER-Batch transfer<br>WALLET_TRANSFER-Wallet transfer<br>SWEEP_FEE_DEDUCT-Sweep fee deduct<br>WITHDRAW_FEE_DEDUCT-Withdraw fee deduct|
 |»»» coinName|string|true|none|Coin name|
 |»»» createdAt|integer|true|none|Created at|
 |»»» exchangeID|string|true|none|Exchange id|
